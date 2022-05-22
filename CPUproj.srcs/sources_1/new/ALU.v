@@ -30,7 +30,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
 
     //from Ifetch
     input[5:0]   Function_opcode;  	// 取指单元来的r-类型指令功能码,r-form instructions[5:0]
-    input[5:0]   Exe_opcode;  		// 取指单元来的操作码
+    input[5:0]   Exe_opcode;  		// 取指单元来的操作码 instruction[31:26]
     input[31:0]  PC_plus_4;         // 来自取指单元的PC+4
     input[4:0]   Shamt;             // 来自取指单元的instruction[10:6]，指定移位次数
 
@@ -48,15 +48,18 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     output reg[31:0] ALU_Result;        // 计算的数据结果
     output [31:0] Addr_Result;		// 计算的地址结果   
   
+    wire[5:0] Exe_code;
+    assign Exe_code = (I_format==0) ? Function_opcode : { 3'b000 , Exe_opcode[2:0] };
 
     wire[2:0] ALU_ctl;
-    assign ALU_ctl[0] = (Exe_opcode[0] | Exe_opcode[3]) & ALUOp[1];
-    assign ALU_ctl[1] = ((!Exe_opcode[2]) | (!ALUOp[1]));
-    assign ALU_ctl[2] = (Exe_opcode[1] & ALUOp[1]) | ALUOp[0];  
+    assign ALU_ctl[0] = (Exe_code[0] | Exe_code[3]) & ALUOp[1]; 
+    assign ALU_ctl[1] = ((!Exe_code[2]) | (!ALUOp[1])); 
+    assign ALU_ctl[2] = (Exe_code[1] & ALUOp[1]) | ALUOp[0];
 
     wire[31:0] Ainput, Binput;
     assign Ainput = Read_data_1; 
     assign Binput = ALUSrc ? Sign_extend : Read_data_2; 
+
 
     reg[31:0] ALU_output_mux;
     always @* begin
@@ -129,7 +132,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
 
     always @* begin
         //set type operation (slt, slti, sltu, sltiu)
-        if( ((ALU_ctl==3'b111) && (Exe_opcode[3]==1)) || ((ALU_ctl == 3'b110) && (ALUOp[0] == 1'b1)))
+        if( ((ALU_ctl==3'b111) && (Exe_code[3]==1)) || (I_format && (ALU_ctl[2:1]==2'b11) && (ALUOp == 2'b10)))
             ALU_Result = (Ainput-Binput<0) ? 1 : 0;
         // //lui operation
         // else if((ALU_ctl==3'b101) && (I_format==1))
@@ -142,7 +145,9 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
             ALU_Result = ALU_output_mux;
     end
 
-    assign Zero = ALU_output_mux == 0;
+    wire[32:0] Branch_Addr;
+
+    assign Zero = (ALU_output_mux == 0);
     assign Addr_Result = PC_plus_4 + Sign_extend << 2;
 
     // always @* begin
