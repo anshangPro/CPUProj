@@ -4,12 +4,13 @@
 
 //TODO:add rst signal
 
-module cpu(input fpga_clk,           //The clock of the FPGA
+module cpu(input fpga_rst,
+           input fpga_clk,           //The clock of the FPGA
            input rx,                 //receive data
            output tx,                //output to the uart
            input [23:0]sw,
            output [23:0]led,
-           output [7:0] segment_led,
+           output [7:0] seg_out,
            output [7:0] seg_en);
     
     wire clk_out;
@@ -23,8 +24,8 @@ module cpu(input fpga_clk,           //The clock of the FPGA
     reg[31:0] low_clk_reg;
     always @(posedge clk_out)low_clk_reg = low_clk_reg+1;
     assign low_clk                       = low_clk_reg[2];
-
     
+    segment seg(.clk(low_clk_reg[12]),.rst(fpga_rst),.in(data),.segment_led(seg_out),.seg_en(seg_en));
     
     
     
