@@ -48,21 +48,24 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     output reg[31:0] ALU_Result;        // 计算的数据结果
     output [31:0] Addr_Result;		// 计算的地址结果   
   
+    reg[31:0] ALU_output_mux;
     wire[5:0] Exe_code;
-    assign Exe_code = (I_format==0) ? Function_opcode : { 3'b000 , Exe_opcode[2:0] };
-
     wire[2:0] ALU_ctl;
+    wire[31:0] Ainput, Binput;
+    wire[2:0] Sftm;
+    reg[31:0] Shift_Result; //the result of shift operation
+
+    assign Exe_code = (I_format==0) ? Function_opcode : { 3'b000 , Exe_opcode[2:0] };
     assign ALU_ctl[0] = (Exe_code[0] | Exe_code[3]) & ALUOp[1]; 
     assign ALU_ctl[1] = ((!Exe_code[2]) | (!ALUOp[1])); 
     assign ALU_ctl[2] = (Exe_code[1] & ALUOp[1]) | ALUOp[0];
-
-    wire[31:0] Ainput, Binput;
     assign Ainput = Read_data_1; 
-    assign Binput = ALUSrc ? Sign_extend : Read_data_2; 
+    assign Binput = (ALUSrc==0) ? Read_data_2 : Sign_extend;
+    assign Sftm = Function_opcode[2:0]; //the code of shift operations
+    assign Zero = (ALU_output_mux == 0);
+    assign Addr_Result = (Sign_extend << 2) + PC_plus_4;
 
-
-    reg[31:0] ALU_output_mux;
-    always @* begin
+    always @(ALU_ctl or Ainput or Binput) begin
         case(ALU_ctl)
             3'b000: begin // and  andi
                 ALU_output_mux = Ainput & Binput;
@@ -80,9 +83,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
                 ALU_output_mux = Ainput ^ Binput;
             end
             3'b101: begin // nor lui
-                if (I_format)
-                        ALU_output_mux = {Binput[15:0], 16'b0};
-                else ALU_output_mux = ~(Ainput | Binput);
+                ALU_output_mux = ~(Ainput | Binput);
             end
             3'b110: begin // sub slti
                 ALU_output_mux = $signed(Ainput) - $signed(Binput);
@@ -111,13 +112,10 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
         endcase
     end
 
-    wire[2:0] Sftm;
-    assign Sftm = Function_opcode[2:0]; //the code of shift operations
-    reg[31:0] Shift_Result; //the result of shift operation
 
     always @* begin
-        if(Sftmd) begin
-            case(Sftm)
+        if(Sftmd)
+            case(Sftm[2:0])
                 3'b000:Shift_Result = Binput << Shamt; //Sll rd,rt,shamt 00000
                 3'b010:Shift_Result = Binput >> Shamt; //Srl rd,rt,shamt 00010
                 3'b100:Shift_Result = Binput << Ainput; //Sllv rd,rt,rs 00010
@@ -126,17 +124,17 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
                 3'b111:Shift_Result = $signed(Binput) >>> Ainput; //Srav rd,rt,rs 00111
                 default:Shift_Result = Binput;
             endcase
-        end else
+        else
             Shift_Result = Binput;
     end
 
     always @* begin
         //set type operation (slt, slti, sltu, sltiu)
-        if( ((ALU_ctl==3'b111) && (Exe_code[3]==1)) || (I_format && (ALU_ctl[2:1]==2'b11) && (ALUOp == 2'b10)))
-            ALU_Result = (Ainput-Binput<0) ? 1 : 0;
+        if( ((ALU_ctl==3'b111) && (Exe_code[3]==1)) || (I_format && (ALU_ctl[2:1]==2'b11)))
+            ALU_Result = ($signed(Ainput) - $signed(Binput)<0) ? 1 : 0;
         // //lui operation
-        // else if((ALU_ctl==3'b101) && (I_format==1))
-        //     ALU_Result[31:0]= 32'h114514;
+        else if((ALU_ctl==3'b101) && (I_format==1))
+            ALU_Result[31:0]= {Sign_extend, 16'b0};
         //shift operation
         else if(Sftmd)
             ALU_Result = Shift_Result;
@@ -144,13 +142,4 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
         else
             ALU_Result = ALU_output_mux;
     end
-
-    wire[32:0] Branch_Addr;
-
-    assign Zero = (ALU_output_mux == 0) ;
-    assign Addr_Result = PC_plus_4 + (Sign_extend << 2);
-
-    // always @* begin
-    //     Addr_Result = PC_plus_4 + Sign_extend << 2;
-    // end
 endmodule
