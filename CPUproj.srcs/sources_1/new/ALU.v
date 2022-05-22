@@ -74,7 +74,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
                 ALU_output_mux = $signed(Ainput) + $signed(Binput);
             end
             3'b011: begin // addu addiu
-                ALU_output_mux = Ainput + Binput;
+                ALU_output_mux = $unsigned(Ainput) + $unsigned(Binput);
             end
             3'b100: begin // xor xori
                 ALU_output_mux = Ainput ^ Binput;
@@ -91,10 +91,10 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
                 // end
             end
             3'b111: begin
-                ALU_output_mux = Ainput - Binput;
+                ALU_output_mux = $unsigned(Ainput) - $unsigned(Binput);
                 // case(Exe_opcode[3:0])
                 //     4'b0011: begin // subu sltiu
-                //         ALU_output_mux = Ainput - Binput;
+                //         ALU_output_mux =  $unsigned(Ainput) - $unsigned(Binput);
                 //         if (I_format) begin
                 //             ALU_output_mux = (Ainput < Sign_extend | Ainput == Sign_extend) ? 32'b1 : 32'b0;
                 //         end
@@ -136,7 +136,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
             ALU_Result = (Ainput-Binput<0) ? 1 : 0;
         // //lui operation
         // else if((ALU_ctl==3'b101) && (I_format==1))
-        //     ALU_Result[31:0]= /*to be completed*/;
+        //     ALU_Result[31:0]= 32'h114514;
         //shift operation
         else if(Sftmd)
             ALU_Result = Shift_Result;
@@ -147,8 +147,8 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
 
     wire[32:0] Branch_Addr;
 
-    assign Zero = (ALU_output_mux == 0);
-    assign Addr_Result = PC_plus_4 + Sign_extend << 2;
+    assign Zero = (ALU_output_mux == 0) ;
+    assign Addr_Result = PC_plus_4 + (Sign_extend << 2);
 
     // always @* begin
     //     Addr_Result = PC_plus_4 + Sign_extend << 2;
