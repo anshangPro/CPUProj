@@ -58,9 +58,7 @@ module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
         if(!RegDst) begin
             if(Instruction[31:29] != 3'b001 | Instruction[28:26] == 3'b000 | Instruction[28:26] == 3'b010) begin
                 Sign_extend = {{16{Instruction[15]}}, Instruction[15:0]};
-            end else if(Instruction[28:26] == 3'b111) begin
-                Sign_extend = {Instruction[15:0], 16'b0};
-            end  else begin
+            end else begin
                 Sign_extend = {16'b0, Instruction[15:0]};
             end
         end  else begin
@@ -69,6 +67,9 @@ module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
     end
 
     // 0拓展
+    // else if(Instruction[28:26] == 3'b111) begin
+    //             Sign_extend = {Instruction[15:0], 16'b0};
+    //         end 
     
 
     // assign Sign_extend = (6'b001100 == Instruction[31:26] || 6'b001101 == Instruction[31:26] )?{{16{1'b0}}, Instruction[15:0]}:{{16{Instruction[15]}}, Instruction[15:0]};

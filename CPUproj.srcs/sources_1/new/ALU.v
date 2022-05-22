@@ -46,62 +46,106 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     //output
     output       Zero;              // 为1表明计算值为0 
     output reg[31:0] ALU_Result;        // 计算的数据结果
-    output reg[31:0] Addr_Result;		// 计算的地址结果   
+    output [31:0] Addr_Result;		// 计算的地址结果   
   
 
     wire[2:0] ALU_ctl;
-    assign ALU_ctl[0] = (Exe_opcode[0] | Exe_opcode[3]) &ALUOp[1];
+    assign ALU_ctl[0] = (Exe_opcode[0] | Exe_opcode[3]) & ALUOp[1];
     assign ALU_ctl[1] = ((!Exe_opcode[2]) | (!ALUOp[1]));
-    assign ALU_ctl[2] = (Exe_opcode[1] & ALUOp[1]) | ALUOp[0];   
+    assign ALU_ctl[2] = (Exe_opcode[1] & ALUOp[1]) | ALUOp[0];  
 
+    wire[31:0] Ainput, Binput;
+    assign Ainput = Read_data_1; 
+    assign Binput = ALUSrc ? Sign_extend : Read_data_2; 
+
+    reg[31:0] ALU_output_mux;
     always @* begin
-        if (ALUOp[1] == 1'b1) begin
-            case(ALU_ctl)
-                3'b000: begin // and  andi
-                    ALU_Result = Read_data_1 & (ALUSrc ? Sign_extend : Read_data_2);
-                end
-                3'b001: begin // or  ori
-                    ALU_Result = Read_data_1 | (ALUSrc ? Sign_extend : Read_data_2);
-                end
-                3'b010: begin // add  addi
-                    ALU_Result = $signed(Read_data_1) + $signed(ALUSrc ? Sign_extend : Read_data_2);
-                end
-                3'b011: begin // addu addiu
-                    ALU_Result = Read_data_1 + (ALUSrc ? Sign_extend : Read_data_2);
-                end
-                3'b100: begin // xor xori
-                    ALU_Result = Read_data_1 ^ (ALUSrc ? Sign_extend : Read_data_2);
-                end
-                3'b101: begin // nor lui
-                    if (I_format)
-                            ALU_Result = Sign_extend;
-                    else ALU_Result = ~(Read_data_1 | (ALUSrc ? Sign_extend : Read_data_2));
-                end
-                3'b110: begin // sub slti
-                    ALU_Result = $signed(Read_data_1) - $signed(ALUSrc ? Sign_extend : Read_data_2);
-                    if (I_format) begin
-                        ALU_Result = {31'b0, ALU_Result[31]};
-                    end
-                end
-                3'b111: begin
-                    case(Exe_opcode[3:0])
-                        4'b0011: begin // subu sltiu
-                            ALU_Result = Read_data_1 - (ALUSrc ? Sign_extend : Read_data_2);
-                            if (I_format) begin
-                                ALU_Result = (Read_data_1 <= Sign_extend) ? 32'b1 : 32'b0;
-                            end
-                        end
-                        4'b1010: begin // slt
-                            ALU_Result = ($signed(Read_data_1) <= $signed(Read_data_2)) ? 32'b1 : 32'b0;
-                        end
-                        4'b1011: begin // sltu
-                            ALU_Result = (Read_data_1 <= Read_data_2) ? 32'b1 : 32'b0;
-                        end
-                    endcase
-                end
-            endcase
-        end else begin
-        end
+        case(ALU_ctl)
+            3'b000: begin // and  andi
+                ALU_output_mux = Ainput & Binput;
+            end
+            3'b001: begin // or  ori
+                ALU_output_mux = Ainput | Binput;
+            end
+            3'b010: begin // add  addi
+                ALU_output_mux = $signed(Ainput) + $signed(Binput);
+            end
+            3'b011: begin // addu addiu
+                ALU_output_mux = Ainput + Binput;
+            end
+            3'b100: begin // xor xori
+                ALU_output_mux = Ainput ^ Binput;
+            end
+            3'b101: begin // nor lui
+                if (I_format)
+                        ALU_output_mux = {Binput[15:0], 16'b0};
+                else ALU_output_mux = ~(Ainput | Binput);
+            end
+            3'b110: begin // sub slti
+                ALU_output_mux = $signed(Ainput) - $signed(Binput);
+                // if (I_format) begin
+                //     ALU_output_mux = {31'b0, ALU_output_mux[31]};
+                // end
+            end
+            3'b111: begin
+                ALU_output_mux = Ainput - Binput;
+                // case(Exe_opcode[3:0])
+                //     4'b0011: begin // subu sltiu
+                //         ALU_output_mux = Ainput - Binput;
+                //         if (I_format) begin
+                //             ALU_output_mux = (Ainput < Sign_extend | Ainput == Sign_extend) ? 32'b1 : 32'b0;
+                //         end
+                //     end
+                //     4'b1010: begin // slt
+                //         ALU_output_mux = (($signed(Ainput) < $signed(Read_data_2)) | ($signed(Ainput) == $signed(Read_data_2))) ? 32'b1 : 32'b0;
+                //     end
+                //     4'b1011: begin // sltu
+                //         ALU_output_mux = (Ainput < Sign_extend | Ainput == Sign_extend) ? 32'b1 : 32'b0;
+                //     end
+                // endcase
+            end
+            default: ALU_output_mux = 0;
+        endcase
     end
 
+    wire[2:0] Sftm;
+    assign Sftm = Function_opcode[2:0]; //the code of shift operations
+    reg[31:0] Shift_Result; //the result of shift operation
+
+    always @* begin
+        if(Sftmd) begin
+            case(Sftm)
+                3'b000:Shift_Result = Binput << Shamt; //Sll rd,rt,shamt 00000
+                3'b010:Shift_Result = Binput >> Shamt; //Srl rd,rt,shamt 00010
+                3'b100:Shift_Result = Binput << Ainput; //Sllv rd,rt,rs 00010
+                3'b110:Shift_Result = Binput >> Ainput; //Srlv rd,rt,rs 00110
+                3'b011:Shift_Result = $signed(Binput) >>> Shamt; //Sra rd,rt,shamt 00011
+                3'b111:Shift_Result = $signed(Binput) >>> Ainput; //Srav rd,rt,rs 00111
+                default:Shift_Result = Binput;
+            endcase
+        end else
+            Shift_Result = Binput;
+    end
+
+    always @* begin
+        //set type operation (slt, slti, sltu, sltiu)
+        if( ((ALU_ctl==3'b111) && (Exe_opcode[3]==1)) || ((ALU_ctl == 3'b110) && (ALUOp[0] == 1'b1)))
+            ALU_Result = (Ainput-Binput<0) ? 1 : 0;
+        // //lui operation
+        // else if((ALU_ctl==3'b101) && (I_format==1))
+        //     ALU_Result[31:0]= /*to be completed*/;
+        //shift operation
+        else if(Sftmd)
+            ALU_Result = Shift_Result;
+        //other types of operation in ALU (arithmatic or logic calculation)
+        else
+            ALU_Result = ALU_output_mux;
+    end
+
+    assign Zero = ALU_output_mux == 0;
+    assign Addr_Result = PC_plus_4 + Sign_extend << 2;
+
+    // always @* begin
+    //     Addr_Result = PC_plus_4 + Sign_extend << 2;
+    // end
 endmodule
