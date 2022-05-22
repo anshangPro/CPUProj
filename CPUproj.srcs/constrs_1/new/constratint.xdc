@@ -1,5 +1,11 @@
 # constratints of the project
 
+
+# the constraints of the uart
+set_property -dict {IOSTANDARD LVCMOS33 PACKAGE_PIN Y19} [get_ports rx]
+set_property -dict {IOSTANDARD LVCMOS33 PACKAGE_PIN V18} [get_ports tx]
+
+
 # the constraints of the clk
 set_property IOSTANDARD LVCMOS33 [get_ports clk]
 set_property PACKAGE_PIN Y18 [get_ports clk]
