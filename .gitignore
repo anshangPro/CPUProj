@@ -3,3 +3,6 @@
 /CPUproj.ip_user_files
 /CPUproj.runs
 /CPUproj.sim
+*.str
+*.jou
+*.log
