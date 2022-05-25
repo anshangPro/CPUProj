@@ -39,16 +39,16 @@ module control32(
     );
 
     assign Jr = (Function_opcode == 6'b001000) & (Opcode == 0);
-    assign RegDST = Opcode == 0;
-    assign ALUSrc = (Opcode[5:3] == 3'b001) | (Opcode == 6'b100011) | (Opcode == 6'b101011);
+    assign RegDST = (Opcode == 0);
+    assign ALUSrc = (Opcode[5:3] == 3'b001) | (Opcode == 6'b100011) | (Opcode == 6'b101011); // algorithm + lw, sw
     assign MemtoReg = Opcode == 6'b100011;
     assign RegWrite = (Opcode == 0 & Function_opcode != 6'b001000) | (Opcode == 6'b100011) | (Opcode[5:3] == 3'b001) | (Opcode == 6'b000011);
     assign MemWrite = Opcode == 6'b101011;
-    assign Branch = Opcode == 6'b000100;
-    assign nBranch = Opcode == 6'b000101;
-    assign Jal = Opcode == 6'b000011;
-    assign Jmp = Opcode == 6'b000010;
-    assign I_format = Opcode[5:3] == 3'b001;
+    assign Branch = (Opcode == 6'b000100);
+    assign nBranch = (Opcode == 6'b000101);
+    assign Jal = (Opcode == 6'b000011);
+    assign Jmp = (Opcode == 6'b000010);
+    assign I_format = (Opcode[5:3] == 3'b001);
     assign Sftmd = ((Function_opcode[5:3] == 3'b000) & (Opcode == 0));
     assign ALUOp = {((Opcode == 0) | I_format), ((Opcode == 6'b000100) | (Opcode == 6'b000101))};
 
