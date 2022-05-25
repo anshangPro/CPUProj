@@ -11,23 +11,28 @@ set_property IOSTANDARD LVCMOS33 [get_ports fpga_clk]
 set_property PACKAGE_PIN Y18 [get_ports fpga_clk]
 
 
+# the constraints of the rst
+set_property IOSTANDARD LVCMOS33 [get_ports fpga_rst]
+set_property PACKAGE_PIN P5 [get_ports fpga_rst]
+
+
 # the constraints of the keyboard
-set_property IOSTANDARD LVCMOS33 [get_ports {col[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {col[0]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[3]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[2]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[1]}]
-set_property IOSTANDARD LVCMOS33 [get_ports {row[0]}]
-set_property PACKAGE_PIN M2 [get_ports {col[3]}]
-set_property PACKAGE_PIN K6 [get_ports {col[2]}]
-set_property PACKAGE_PIN J6 [get_ports {col[1]}]
-set_property PACKAGE_PIN L5 [get_ports {col[0]}]
-set_property PACKAGE_PIN K4 [get_ports {row[3]}]
-set_property PACKAGE_PIN J4 [get_ports {row[2]}]
-set_property PACKAGE_PIN L3 [get_ports {row[1]}]
-set_property PACKAGE_PIN K3 [get_ports {row[0]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {col[3]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {col[2]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {col[1]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {col[0]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {row[3]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {row[2]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {row[1]}]
+#set_property IOSTANDARD LVCMOS33 [get_ports {row[0]}]
+#set_property PACKAGE_PIN M2 [get_ports {col[3]}]
+#set_property PACKAGE_PIN K6 [get_ports {col[2]}]
+#set_property PACKAGE_PIN J6 [get_ports {col[1]}]
+#set_property PACKAGE_PIN L5 [get_ports {col[0]}]
+#set_property PACKAGE_PIN K4 [get_ports {row[3]}]
+#set_property PACKAGE_PIN J4 [get_ports {row[2]}]
+#set_property PACKAGE_PIN L3 [get_ports {row[1]}]
+#set_property PACKAGE_PIN K3 [get_ports {row[0]}]
 
 
 # the constraints of the segments
