@@ -49,7 +49,7 @@ module cpu(input fpga_rst,
     wire[31:0] data_from_ram;
 
     // ifetch module
-    Ifetch ifetch(
+    Ifetc32 ifetch(
         .clock(clk_out), .reset(fpga_rst),
         .Instruction(instruction), .branch_base_addr(branch_base_addr), .link_addr(link_addr), 
         .Addr_result(Addr_Result), .Zero(Zero), // from alu
