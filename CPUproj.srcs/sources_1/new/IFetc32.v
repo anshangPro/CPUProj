@@ -20,7 +20,9 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Ifetc32(Instruction, branch_base_addr, link_addr, clock, reset, Addr_result, Read_data_1, Branch, nBranch, Jmp, Jal, Jr, Zero);
+module Ifetc32(Instruction, branch_base_addr, link_addr, clock, reset, Addr_result, Read_data_1, Branch, nBranch, Jmp, Jal, Jr, Zero,
+    upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i
+);
 output[31:0] Instruction; // the instruction fetched from this module
 output[31:0] branch_base_addr; // (pc+4) to ALU which is used by branch type instruction
 output reg[31:0] link_addr; // (pc+4) to Decoder which is used by jal instruction
@@ -39,6 +41,14 @@ input nBranch; // while nBranch is 1,it means current instruction is bnq
 input Jmp; // while Jmp 1, it means current instruction is jump
 input Jal; // while Jal is 1, it means current instruction is jal
 input Jr; // while Jr is 1, it means current instruction is jr
+
+// UART Programmer Pinouts
+input upg_rst_i; // UPG reset (Active High)
+input upg_clk_i; // UPG clock (10MHz)
+input upg_wen_i; // UPG write enable
+input[13:0] upg_adr_i; // UPG write address
+input[31:0] upg_dat_i; // UPG write data
+input upg_done_i; // 1 if program finished
 
 // 读出寄存器  posedge
 // 访存       negedge
@@ -72,5 +82,13 @@ always @(negedge clock) begin
     end
 end
 
-prgrom imem(.douta(Instruction), .addra(PC[15:2]), .clka(clock));
+wire kickOff = upg_rst_i | (~upg_rst_i &upg_done_i);
+
+prgrom imem (
+.clka (kickOff ? clock : upg_clk_i ),
+.wea (kickOff ? 1'b0 : upg_wen_i ),
+.addra (kickOff ? PC[15:2] : upg_adr_i ), .dina (kickOff ? 32'h00000000 : upg_dat_i ),.douta (Instruction)
+);
+
+// prgrom imem(.douta(Instruction), .addra(PC[15:2]), .clka(clock));
 endmodule
