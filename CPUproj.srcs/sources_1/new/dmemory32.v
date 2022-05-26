@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module dmemory32(readData,address,writeData,memWrite,clock, upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i);
+module dmemory32(readData,address,writeData,memWrite,clock, upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i, sw, led);
 input clock; // Clock signal
 /* used to determine to write the memory unit or not,
 in the left screenshot its name is ‘WE’ */
@@ -31,7 +31,10 @@ input[31:0] address;
 input[31:0] writeData;
 /*data to be read from the memory unit, in the left
 screenshot its name is ‘MemData’ */
-output[31:0] readData;
+output reg[31:0] readData;
+
+input [23:0] sw;
+output reg[23:0] led;
 
 // UART Programmer Pinouts
 input upg_rst_i; // UPG reset (Active High)
@@ -44,16 +47,36 @@ input upg_done_i; // 1 if programming is finished
 /*The clock is from CPU-TOP, suppose its one edge has been used at the upstream module of data memory, suchas IFetch, Why Data-Memroy DO NOT use the same edge as other module ? */
 assign clk = !clock;
 
-
 /* CPU work on normal mode when kickOff is 1. CPU work on Uart communicate mode whenkickOffis0.*/
 wire kickOff = upg_rst_i | (~upg_rst_i &upg_done_i);
+wire [31:0] readDataMem;
+wire outter;
+assign outter = (address[31:16] == 16'hffff); 
+
 RAM ram (
 .clka (kickOff ? clk : upg_clk_i),
-.wea (kickOff ? memWrite : upg_wen_i),
+.wea (kickOff ? (memWrite & ~outter) : upg_wen_i),
 .addra (kickOff ? address[15:2] : upg_adr_i),
 .dina (kickOff ? writeData : upg_dat_i),
-.douta (readData)
+.douta (readDataMem)
 );
+
+always @* begin
+    if (outter) begin
+        case (address)
+            32'hfffff000: led = kickOff ? writeData : upg_dat_i;
+            default: led = led;
+        endcase
+    end
+end
+
+always @* begin
+    case (address)
+        32'hfffffff0: readData = sw;
+        32'hffffff00: readData = led;
+        default: readData = readDataMem;
+    endcase
+end
 
 // RAM ram (
 // .clka(clk), // input wire clka

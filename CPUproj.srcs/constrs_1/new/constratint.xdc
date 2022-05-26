@@ -5,6 +5,10 @@
 set_property -dict {IOSTANDARD LVCMOS33 PACKAGE_PIN Y19} [get_ports rx]
 set_property -dict {IOSTANDARD LVCMOS33 PACKAGE_PIN V18} [get_ports tx]
 
+# the constraints of the mode_switch
+set_property IOSTANDARD LVCMOS33 [get_ports mode_switch]
+set_property PACKAGE_PIN P20 [get_ports mode_switch]
+
 
 # the constraints of the clk
 set_property IOSTANDARD LVCMOS33 [get_ports fpga_clk]

@@ -14,6 +14,7 @@ module cpu(input fpga_rst,
            output [7:0] seg_out,
            output [7:0] seg_en);
     
+    wire [23:0] led_in;
     wire clk_out;
     wire low_clk; // This wire is used to pass the low frequency clock
     wire [31:0] data; // This wire is used to pass the data to display
@@ -58,6 +59,8 @@ module cpu(input fpga_rst,
     always @(posedge mode_stable) begin
     mode = mode + 1;
     end
+
+    assign led = mode ? led_in : {1'b1, 23'b0};
 
     // uart
     uart_model uart(
@@ -108,7 +111,8 @@ module cpu(input fpga_rst,
         .address(ALU_Result), // from alu   rs + imm(sigined)
         .writeData(read_data_2), // from decoder
         .memWrite(MemWrite), // from controller
-        .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i) // from uart
+        .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
+        .sw(sw), .led(led_in)
         );
     
     
