@@ -110,5 +110,25 @@ int main() {
         *led24 = *led24 | (~(1 << i));
       }
     }
+  } else if (sw[23] == 1 && sw[22] == 0 && sw[21] == 0) {
+    while (sw[20] == 0) {
+    }
+    while (sw[20] == 1) {
+      for (int i = 0; i < 16; i++) {
+        data1[i] = sw[i];
+      }
+    }
+    while (sw[20] == 0) {
+    }
+    while (sw[20] == 1) {
+      for (int i = 0; i < 16; i++) {
+        data2[i] = sw[i];
+      }
+    }
+    for (int i = 0; i < 16; i++) {
+      if (data1[i] ^ data2[i]) {
+        *led24 = *led24 | (~(1 << i));
+      }
+    }
   }
 }
