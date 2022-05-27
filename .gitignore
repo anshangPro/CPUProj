@@ -89,8 +89,11 @@
 #C-files
 #########
 !*.c
-!CPUproj.srcs/code/*
 !*.h
 !*.elf
 !*.bmm
 !*.xmp
+#########
+#COE files and c
+#########
+!CPUproj.srcs/code/*
