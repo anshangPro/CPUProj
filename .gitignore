@@ -89,6 +89,7 @@
 #C-files
 #########
 !*.c
+!CPUproj.srcs/code/*
 !*.h
 !*.elf
 !*.bmm
