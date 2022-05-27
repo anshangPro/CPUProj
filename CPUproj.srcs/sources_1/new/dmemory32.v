@@ -75,8 +75,8 @@ end
 
 always @* begin
     case (address)
-        32'hfffffff0: readData = sw;
-        32'hffffff00: readData = led;
+        32'hfffffff0: readData = {8'b0, sw};
+        32'hffffff00: readData = {8'b0, led};
         default: readData = readDataMem;
     endcase
 end
