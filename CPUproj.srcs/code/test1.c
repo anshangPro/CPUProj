@@ -1,9 +1,6 @@
 //
 // Created by dgy on 2022/5/27.
 //
-#include <memory.h>
-#include <stdio.h>
-#include <stdlib.h>
 
 #define bool int
 #define true 1
@@ -16,7 +13,7 @@
 volatile int *sw24 = (int *)0xFFFFFFF0;
 volatile int *led24 = (int *)0xFFFFFF00;
 
-int main() {
+extern int main() {
   int sw_value = *sw24;
   int led_value = *led24;
   int sw[24];
