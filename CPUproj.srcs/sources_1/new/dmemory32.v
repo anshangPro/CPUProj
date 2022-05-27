@@ -67,7 +67,7 @@ always @(posedge clock, posedge rst) begin
     else 
     if (outter & memWrite) begin
         case (address)
-            32'hfffff000: led = kickOff ? writeData : upg_dat_i;
+            32'hffffff00: led = kickOff ? writeData : upg_dat_i;
             default: led = led;
         endcase
     end

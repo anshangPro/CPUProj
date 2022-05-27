@@ -23,7 +23,8 @@
 
 
 module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
-                 Jal,RegWrite,MemtoReg,RegDst,Sign_extend,clock,reset,opcplus4);
+                 Jal,RegWrite,MemtoReg,RegDst,Sign_extend,clock,reset,opcplus4,
+                 t1, t2, t3);
 
     output [31:0] read_data_1;               // 输出的第一操作数
     output [31:0] read_data_2;               // 输出的第二操作数
@@ -40,6 +41,11 @@ module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
 
     reg[31:0] register[31:0];
     integer iTemp;
+
+    output wire[31:0] t1, t2, t3;
+    assign t1 = register[9];
+    assign t2 = register[10];
+    assign t3 = register[11];
 
     // register write
     always @(posedge clock, posedge reset) begin

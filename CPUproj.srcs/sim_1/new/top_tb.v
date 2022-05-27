@@ -42,13 +42,17 @@ module top_tb();
         sw          = 0;
         
         #10 fpga_rst = 0;
+
+        #100 sw = 24'hfff;
+        #100 sw = 0;
+        #100 sw = 24'hff0;
     end
     
     //        output [7:0] seg_out,
     //    output [7:0] seg_en
     wire [23:0] led_in;
     wire clk_out;
-    wire low_clk; // This wire is used to pass the low frequency clock
+    // wire low_clk; // This wire is used to pass the low frequency clock
     // wire [31:0] data; // This wire is used to pass the data to display
     wire upg_clk_10mhz;
     
@@ -124,6 +128,7 @@ module top_tb();
     
     // decoder
     decode32 decoder(
+    .t1(t1), .t2(t2), .t3(t3), // debug
     .clock(clk_out), .reset(fpga_rst | ~mode),
     .read_data_1(read_data_1), .read_data_2(read_data_2), .Sign_extend(Sign_extend),
     .Instruction(instruction), .opcplus4(link_addr), // from ifetch
