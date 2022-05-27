@@ -2,8 +2,8 @@
 # Vivado v2017.4 (64-bit)
 # SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
 # IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
-# Start of session at: Fri May 27 16:03:24 2022
-# Process ID: 4168
+# Start of session at: Fri May 27 16:46:31 2022
+# Process ID: 18120
 # Current directory: D:/Digital/CPUproj/CPUproj.runs/synth_1
 # Command line: vivado.exe -log cpu.vds -product Vivado -mode batch -messageDb vivado.pb -notrace -source cpu.tcl
 # Log file: D:/Digital/CPUproj/CPUproj.runs/synth_1/cpu.vds
@@ -18,22 +18,21 @@ D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM.xci
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7a100t'
 INFO: Launching helper process for spawning children vivado processes
-INFO: Helper process launched with PID 14524 
+INFO: Helper process launched with PID 12900 
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 345.469 ; gain = 100.742
+Starting RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 344.777 ; gain = 100.746
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-638] synthesizing module 'cpu' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/cpu.v:7]
-INFO: [Synth 8-638] synthesizing module 'cpuclk' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/cpuclk_stub.v:5]
-INFO: [Synth 8-256] done synthesizing module 'cpuclk' (1#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/cpuclk_stub.v:5]
+INFO: [Synth 8-638] synthesizing module 'cpuclk' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/cpuclk_stub.v:5]
+INFO: [Synth 8-256] done synthesizing module 'cpuclk' (1#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/cpuclk_stub.v:5]
 INFO: [Synth 8-638] synthesizing module 'debounce' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/debounce.v:3]
 INFO: [Synth 8-256] done synthesizing module 'debounce' (2#1) [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/debounce.v:3]
-INFO: [Synth 8-638] synthesizing module 'uart_model' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/uart_model_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'uart_model' (3#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/uart_model_stub.v:6]
+INFO: [Synth 8-638] synthesizing module 'uart_model' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/uart_model_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'uart_model' (3#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/uart_model_stub.v:6]
 INFO: [Synth 8-638] synthesizing module 'Ifetc32' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/IFetc32.v:23]
-INFO: [Synth 8-638] synthesizing module 'prgrom' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/prgrom_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'prgrom' (4#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/prgrom_stub.v:6]
+INFO: [Synth 8-638] synthesizing module 'prgrom' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/prgrom_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'prgrom' (4#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/prgrom_stub.v:6]
 INFO: [Synth 8-256] done synthesizing module 'Ifetc32' (5#1) [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/IFetc32.v:23]
-WARNING: [Synth 8-689] width (15) of port connection 'upg_adr_i' does not match port width (14) of module 'Ifetc32' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/cpu.v:81]
 INFO: [Synth 8-638] synthesizing module 'control32' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/Controller.v:23]
 INFO: [Synth 8-256] done synthesizing module 'control32' (6#1) [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/Controller.v:23]
 INFO: [Synth 8-638] synthesizing module 'decode32' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/Decoder.v:25]
@@ -45,10 +44,9 @@ WARNING: [Synth 8-567] referenced signal 'Sftmd' should be on the sensitivity li
 WARNING: [Synth 8-567] referenced signal 'Sftm' should be on the sensitivity list [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/ALU.v:118]
 INFO: [Synth 8-256] done synthesizing module 'executs32' (8#1) [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/ALU.v:23]
 INFO: [Synth 8-638] synthesizing module 'dmemory32' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/dmemory32.v:23]
-INFO: [Synth 8-638] synthesizing module 'RAM' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/RAM_stub.v:6]
-INFO: [Synth 8-256] done synthesizing module 'RAM' (9#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/realtime/RAM_stub.v:6]
+INFO: [Synth 8-638] synthesizing module 'RAM' [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/RAM_stub.v:6]
+INFO: [Synth 8-256] done synthesizing module 'RAM' (9#1) [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/realtime/RAM_stub.v:6]
 INFO: [Synth 8-256] done synthesizing module 'dmemory32' (10#1) [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/dmemory32.v:23]
-WARNING: [Synth 8-689] width (15) of port connection 'upg_adr_i' does not match port width (14) of module 'dmemory32' [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/cpu.v:116]
 INFO: [Synth 8-256] done synthesizing module 'cpu' (11#1) [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/cpu.v:7]
 WARNING: [Synth 8-3331] design executs32 has unconnected port Function_opcode[5]
 WARNING: [Synth 8-3331] design executs32 has unconnected port Function_opcode[4]
@@ -57,7 +55,7 @@ WARNING: [Synth 8-3331] design executs32 has unconnected port Exe_opcode[4]
 WARNING: [Synth 8-3331] design executs32 has unconnected port Exe_opcode[3]
 WARNING: [Synth 8-3331] design executs32 has unconnected port Jr
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:04 ; elapsed = 00:00:05 . Memory (MB): peak = 397.723 ; gain = 152.996
+Finished RTL Elaboration : Time (s): cpu = 00:00:03 ; elapsed = 00:00:05 . Memory (MB): peak = 396.973 ; gain = 152.941
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -67,21 +65,21 @@ Report Check Netlist:
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:04 ; elapsed = 00:00:06 . Memory (MB): peak = 397.723 ; gain = 152.996
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:03 ; elapsed = 00:00:06 . Memory (MB): peak = 396.973 ; gain = 152.941
 ---------------------------------------------------------------------------------
 INFO: [Device 21-403] Loading part xc7a100tfgg484-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc] for cell 'clk'
-Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc] for cell 'clk'
-Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp5/prgrom_in_context.xdc] for cell 'ifetch/imem'
-Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp5/prgrom_in_context.xdc] for cell 'ifetch/imem'
-Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp6/uart_model_in_context.xdc] for cell 'uart'
-Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp6/uart_model_in_context.xdc] for cell 'uart'
-Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp7/RAM_in_context.xdc] for cell 'dataRAM/ram'
-Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp7/RAM_in_context.xdc] for cell 'dataRAM/ram'
+Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc] for cell 'clk'
+Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc] for cell 'clk'
+Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp5/prgrom_in_context.xdc] for cell 'ifetch/imem'
+Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp5/prgrom_in_context.xdc] for cell 'ifetch/imem'
+Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp6/uart_model_in_context.xdc] for cell 'uart'
+Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp6/uart_model_in_context.xdc] for cell 'uart'
+Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp7/RAM_in_context.xdc] for cell 'dataRAM/ram'
+Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp7/RAM_in_context.xdc] for cell 'dataRAM/ram'
 Parsing XDC File [D:/Digital/CPUproj/CPUproj.srcs/constrs_1/new/constratint.xdc]
 Finished Parsing XDC File [D:/Digital/CPUproj/CPUproj.srcs/constrs_1/new/constratint.xdc]
 INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [D:/Digital/CPUproj/CPUproj.srcs/constrs_1/new/constratint.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/cpu_propImpl.xdc].
@@ -91,28 +89,28 @@ Completed Processing XDC Constraints
 INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 759.387 ; gain = 0.000
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.004 . Memory (MB): peak = 759.305 ; gain = 0.000
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:11 ; elapsed = 00:00:16 . Memory (MB): peak = 759.387 ; gain = 514.660
+Finished Constraint Validation : Time (s): cpu = 00:00:09 ; elapsed = 00:00:17 . Memory (MB): peak = 759.305 ; gain = 515.273
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7a100tfgg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:11 ; elapsed = 00:00:16 . Memory (MB): peak = 759.387 ; gain = 514.660
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:09 ; elapsed = 00:00:17 . Memory (MB): peak = 759.305 ; gain = 515.273
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
-Applied set_property IO_BUFFER_TYPE = NONE for fpga_clk. (constraint file  D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc, line 4).
-Applied set_property CLOCK_BUFFER_TYPE = NONE for fpga_clk. (constraint file  D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-4168-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc, line 5).
+Applied set_property IO_BUFFER_TYPE = NONE for fpga_clk. (constraint file  D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc, line 4).
+Applied set_property CLOCK_BUFFER_TYPE = NONE for fpga_clk. (constraint file  D:/Digital/CPUproj/CPUproj.runs/synth_1/.Xil/Vivado-18120-LAPTOP-ANSHANG/dcp4/cpuclk_in_context.xdc, line 5).
 Applied set_property DONT_TOUCH = true for clk. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for dataRAM/ram. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for ifetch/imem. (constraint file  auto generated constraint, line ).
 Applied set_property DONT_TOUCH = true for uart. (constraint file  auto generated constraint, line ).
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:11 ; elapsed = 00:00:17 . Memory (MB): peak = 759.387 ; gain = 514.660
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:09 ; elapsed = 00:00:17 . Memory (MB): peak = 759.305 ; gain = 515.273
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5546] ROM "change" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5544] ROM "PC" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
@@ -152,7 +150,7 @@ INFO: [Synth 8-5546] ROM "register_reg[0]" won't be mapped to RAM because it is 
 INFO: [Synth 8-5818] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the output of the operator [D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/ALU.v:66]
 INFO: [Synth 8-5545] ROM "led" won't be mapped to RAM because address size (32) is larger than maximum supported(25)
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:11 ; elapsed = 00:00:17 . Memory (MB): peak = 759.387 ; gain = 514.660
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:17 . Memory (MB): peak = 759.305 ; gain = 515.273
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -276,7 +274,7 @@ WARNING: [Synth 8-3331] design executs32 has unconnected port Exe_opcode[4]
 WARNING: [Synth 8-3331] design executs32 has unconnected port Exe_opcode[3]
 WARNING: [Synth 8-3331] design executs32 has unconnected port Jr
 ---------------------------------------------------------------------------------
-Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:44 ; elapsed = 00:01:05 . Memory (MB): peak = 759.387 ; gain = 514.660
+Finished Cross Boundary and Area Optimization : Time (s): cpu = 00:00:43 ; elapsed = 00:01:09 . Memory (MB): peak = 759.305 ; gain = 515.273
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -291,13 +289,13 @@ INFO: [Synth 8-5578] Moved timing constraint from pin 'clk/clk_out1' to pin 'clk
 INFO: [Synth 8-5578] Moved timing constraint from pin 'clk/clk_out2' to pin 'clk/bbstub_clk_out2/O'
 INFO: [Synth 8-5819] Moved 2 constraints on hierarchical pins to their respective driving/loading pins
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:50 ; elapsed = 00:01:12 . Memory (MB): peak = 788.082 ; gain = 543.355
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:48 ; elapsed = 00:01:17 . Memory (MB): peak = 789.945 ; gain = 545.914
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:01:16 ; elapsed = 00:01:50 . Memory (MB): peak = 936.398 ; gain = 691.672
+Finished Timing Optimization : Time (s): cpu = 00:01:09 ; elapsed = 00:01:54 . Memory (MB): peak = 940.316 ; gain = 696.285
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -309,7 +307,7 @@ Report RTL Partitions:
 Start Technology Mapping
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:01:23 ; elapsed = 00:01:59 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Technology Mapping : Time (s): cpu = 00:01:15 ; elapsed = 00:02:04 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -333,7 +331,7 @@ Start Final Netlist Cleanup
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished IO Insertion : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -346,7 +344,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -358,25 +356,25 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Ports
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Handling Custom Attributes
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Handling Custom Attributes : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Handling Custom Attributes : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Renaming Generated Nets
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Nets : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Renaming Generated Nets : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Writing Synthesis Report
@@ -402,13 +400,13 @@ Report Cell Usage:
 |4     |uart_model |     1|
 |5     |CARRY4     |    36|
 |6     |LUT1       |     2|
-|7     |LUT2       |   119|
-|8     |LUT3       |   234|
-|9     |LUT4       |   199|
-|10    |LUT5       |   263|
-|11    |LUT6       |  1246|
+|7     |LUT2       |    93|
+|8     |LUT3       |   248|
+|9     |LUT4       |   223|
+|10    |LUT5       |   273|
+|11    |LUT6       |  1186|
 |12    |MUXF7      |   258|
-|13    |MUXF8      |    41|
+|13    |MUXF8      |    47|
 |14    |FDCE       |  1064|
 |15    |FDRE       |    65|
 |16    |IBUF       |    27|
@@ -419,20 +417,20 @@ Report Instance Areas:
 +------+---------------+----------+------+
 |      |Instance       |Module    |Cells |
 +------+---------------+----------+------+
-|1     |top            |          |  3696|
-|2     |  dataRAM      |dmemory32 |   106|
-|3     |  decoder      |decode32  |  2221|
-|4     |  ifetch       |Ifetc32   |  1223|
+|1     |top            |          |  3664|
+|2     |  dataRAM      |dmemory32 |    82|
+|3     |  decoder      |decode32  |  2229|
+|4     |  ifetch       |Ifetc32   |  1207|
 |5     |  rst_debounce |debounce  |    39|
 +------+---------------+----------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:01:23 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 ---------------------------------------------------------------------------------
 Synthesis finished with 0 errors, 0 critical warnings and 6 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:01:17 ; elapsed = 00:01:54 . Memory (MB): peak = 963.770 ; gain = 357.379
-Synthesis Optimization Complete : Time (s): cpu = 00:01:24 ; elapsed = 00:02:00 . Memory (MB): peak = 963.770 ; gain = 719.043
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:08 ; elapsed = 00:01:59 . Memory (MB): peak = 962.676 ; gain = 356.312
+Synthesis Optimization Complete : Time (s): cpu = 00:01:15 ; elapsed = 00:02:05 . Memory (MB): peak = 962.676 ; gain = 718.645
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 362 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 368 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
@@ -441,12 +439,12 @@ INFO: [Project 1-111] Unisim Transformation Summary:
 No Unisim elements were transformed.
 
 INFO: [Common 17-83] Releasing license: Synthesis
-77 Infos, 18 Warnings, 0 Critical Warnings and 0 Errors encountered.
+77 Infos, 16 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:01:26 ; elapsed = 00:02:05 . Memory (MB): peak = 963.770 ; gain = 730.562
+synth_design: Time (s): cpu = 00:01:18 ; elapsed = 00:02:10 . Memory (MB): peak = 962.676 ; gain = 730.148
 INFO: [Common 17-600] The following parameters have non-default value.
 general.maxThreads
 INFO: [Common 17-1381] The checkpoint 'D:/Digital/CPUproj/CPUproj.runs/synth_1/cpu.dcp' has been generated.
 INFO: [runtcl-4] Executing : report_utilization -file cpu_utilization_synth.rpt -pb cpu_utilization_synth.pb
-report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.048 . Memory (MB): peak = 963.770 ; gain = 0.000
-INFO: [Common 17-206] Exiting Vivado at Fri May 27 16:05:32 2022...
+report_utilization: Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.048 . Memory (MB): peak = 962.676 ; gain = 0.000
+INFO: [Common 17-206] Exiting Vivado at Fri May 27 16:48:45 2022...

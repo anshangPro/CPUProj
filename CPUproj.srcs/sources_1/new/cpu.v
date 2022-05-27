@@ -17,7 +17,7 @@ module cpu(input fpga_rst,
     wire [23:0] led_in;
     wire clk_out;
     wire low_clk; // This wire is used to pass the low frequency clock
-    wire [31:0] data; // This wire is used to pass the data to display
+    // wire [31:0] data; // This wire is used to pass the data to display
     wire upg_clk_10mhz;
     
     cpuclk clk(.clk_in1(fpga_clk),.clk_out1(clk_out), .clk_out2(upg_clk_10mhz));
@@ -61,7 +61,7 @@ module cpu(input fpga_rst,
     mode = mode + 1;
     end
 
-    assign led = mode ? led_in : {1'b1, 23'b0};
+    assign led = mode ? led_in : {1'b1, 21'b0, rx, upg_done_i};
     // assign led = led_in;
 
     // uart
@@ -78,7 +78,7 @@ module cpu(input fpga_rst,
         .Addr_result(Addr_Result), .Zero(Zero), // from alu
         .Read_data_1(read_data_1), // from decoder
         .Branch(Branch), .nBranch(nBranch), .Jmp(Jmp), .Jal(Jal), .Jr(Jr), // from controller
-        .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & (!upg_adr_i[14])), .upg_adr_i(upg_adr_i), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i) // from uart
+        .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & (!upg_adr_i[14])), .upg_adr_i(upg_adr_i[13:0]), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i) // from uart
         ); 
 
     // controller
@@ -113,7 +113,7 @@ module cpu(input fpga_rst,
         .address(ALU_Result), // from alu   rs + imm(sigined)
         .writeData(read_data_2), // from decoder
         .memWrite(MemWrite), // from controller
-        .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
+        .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i[13:0]), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
         .sw(sw), .led(led_in)
         );
     

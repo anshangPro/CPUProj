@@ -62,7 +62,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
 
 
     reg[31:0] ALU_output_mux;
-    always @(ALU_ctl or Ainput or Binput) begin
+    always @(ALU_ctl or Ainput or Binput or I_format) begin
         case(ALU_ctl)
             3'b000: begin // and  andi
                 ALU_output_mux = Ainput & Binput;
@@ -115,7 +115,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     assign Sftm = Function_opcode[2:0]; //the code of shift operations
     reg[31:0] Shift_Result; //the result of shift operation
 
-    always @(Binput, Shamt, Ainput) begin
+    always @(Binput, Shamt, Ainput, Sftmd, Sftm) begin
         if(Sftmd) begin
             case(Sftm)
                 3'b000:Shift_Result = Binput << Shamt; //Sll rd,rt,shamt 00000
