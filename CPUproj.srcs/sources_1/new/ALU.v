@@ -115,7 +115,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     assign Sftm = Function_opcode[2:0]; //the code of shift operations
     reg[31:0] Shift_Result; //the result of shift operation
 
-    always @* begin
+    always @(Binput, Shamt, Ainput) begin
         if(Sftmd) begin
             case(Sftm)
                 3'b000:Shift_Result = Binput << Shamt; //Sll rd,rt,shamt 00000
@@ -148,7 +148,7 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     wire[32:0] Branch_Addr;
 
     assign Zero = (ALU_output_mux == 0);
-    assign Addr_Result = (Sign_extend << 2) + PC_plus_4;
+    assign Addr_Result = ($signed(Sign_extend) <<< 2) + PC_plus_4;
 
     // always @* begin
     //     Addr_Result = PC_plus_4 + Sign_extend << 2;

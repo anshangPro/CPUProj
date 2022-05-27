@@ -20,7 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module dmemory32(readData,address,writeData,memWrite,clock, upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i, sw, led);
+module dmemory32(readData,address,writeData,memWrite,clock, upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i, sw, led, rst);
+input rst;
 input clock; // Clock signal
 /* used to determine to write the memory unit or not,
 in the left screenshot its name is ‘WE’ */
@@ -61,8 +62,10 @@ RAM ram (
 .douta (readDataMem)
 );
 
-always @* begin
-    if (outter) begin
+always @(posedge clock, posedge rst) begin
+    if (rst) led = 0;
+    else 
+    if (outter & memWrite) begin
         case (address)
             32'hfffff000: led = kickOff ? writeData : upg_dat_i;
             default: led = led;

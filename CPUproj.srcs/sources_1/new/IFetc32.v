@@ -69,9 +69,10 @@ always @* begin
 end
 
 always @(negedge clock) begin
-    if(reset == 1)
+    if(reset == 1) begin
         PC <= 32'h0000_0000;
-    else begin
+        link_addr <= 0;
+    end else begin
         if (Jmp == 1) 
             PC <= {PC[31:28], Instruction[25:0], 2'b00};
         else if (Jal == 1) begin

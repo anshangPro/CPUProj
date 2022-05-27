@@ -8,7 +8,7 @@ module debounce(
     );
 
     reg change;
-    reg [7:0] cnt;
+    reg [13:0] cnt;
 
     always @ (posedge clk_fast or posedge rst)begin
         if(rst) begin 
@@ -17,7 +17,7 @@ module debounce(
             key_out <= 0;
         end
         else begin
-            if(cnt == 200) begin  
+            if(cnt == 14'd10000) begin  
                 cnt <= 0;
                 change <= 0;
             end else begin
