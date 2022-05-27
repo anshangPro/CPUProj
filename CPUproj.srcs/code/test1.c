@@ -21,6 +21,8 @@ int main() {
   int led_value = *led24;
   int sw[24];
   int led[24];
+  int data1[16];
+  int data2[16];
   for (int i = 0; i < 24; i++) {
     sw[i] = sw_value & (1 << i);
     led[i] = led_value & (1 << i);
@@ -30,7 +32,7 @@ int main() {
   if (sw[23] == 0 && sw[22] == 0 && sw[21] == 0) {
     for (int i = 0; i < 16; i++) {
       if (sw[i] == 1) {
-        *led24 = *led24 | (~(1 << 23));
+        *led24 = *led24 | (~(1 << i));
       }
     }
     for (int i = 15; i >= 0; i--) {
@@ -55,7 +57,7 @@ int main() {
     while (sw[20] == 1) {
       for (int i = 0; i < 16; i++) {
         if (sw[i] == 1) {
-          *led24 = *led24 | (~(1 << 23));
+          *led24 = *led24 | (~(1 << i));
         }
       }
     }
@@ -64,8 +66,28 @@ int main() {
     while (sw[20] == 1) {
       for (int i = 0; i < 16; i++) {
         if (sw[i] == 1) {
-          *led24 = *led24 | (~(1 << 23));
+          *led24 = *led24 | (~(1 << i));
         }
+      }
+    }
+  }else if(sw[23] == 0 && sw[22] == 1 && sw[21] == 0){
+    while (sw[20] == 0) {
+    }
+    while (sw[20] == 1) {
+      for (int i = 0; i < 16; i++) {
+        data1[i] = sw[i];
+      }
+    }
+    while (sw[20] == 0) {
+    }
+    while (sw[20] == 1) {
+      for (int i = 0; i < 16; i++) {
+        data2[i] = sw[i];
+      }
+    }
+    for (int i = 0; i < 16; i++) {
+      if(data1[i] & data2[i]){
+        *led24 = *led24 | (~(1 << i));
       }
     }
   }
