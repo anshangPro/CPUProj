@@ -25,7 +25,7 @@ extern int main() {
       sw[i] = sw_value & (1 << i);
       led[i] = led_value & (1 << i);
     }
-    *led24 = *led24 | (~(1 << 23));
+    *led24 = *led24 | (1 << 23);
     int firstBit = 0;
     bool flag = true;
     if (sw[23] == 0 && sw[22] == 0 && sw[21] == 0) {
