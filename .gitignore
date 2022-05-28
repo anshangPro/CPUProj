@@ -93,3 +93,7 @@
 !*.elf
 !*.bmm
 !*.xmp
+#########
+#COE files and c
+#########
+!CPUproj.srcs/code/*

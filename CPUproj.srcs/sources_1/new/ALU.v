@@ -146,9 +146,18 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     end
 
     wire[32:0] Branch_Addr;
-
-    assign Zero = (ALU_output_mux == 0);
+    reg jump;
+    assign Zero = jump;
     assign Addr_Result = ($signed(Sign_extend) <<< 2) + PC_plus_4;
+
+    always @* begin
+        case(Exe_opcode[1:0])
+            2'b00: jump = Ainput == Binput;
+            2'b01: jump = ~(Ainput == Binput);
+            2'b10: jump = $signed(Ainput) <= 0 ;
+            2'b11: jump = $signed(Ainput) > 0;
+        endcase
+    end
 
     // always @* begin
     //     Addr_Result = PC_plus_4 + Sign_extend << 2;
