@@ -102,7 +102,7 @@ module cpu(input fpga_rst,
     executs32 alu(
         .Zero(Zero), .ALU_Result(ALU_Result), .Addr_Result(Addr_Result),
         .Read_data_1(read_data_1), .Read_data_2(read_data_2), .Sign_extend(Sign_extend), // from decoder
-        .Function_opcode(instruction[5:0]), .Exe_opcode(instruction[31:26]), .PC_plus_4(branch_base_addr), .Shamt(instruction[4:0]), // from ifetch
+        .Function_opcode(instruction[5:0]), .Exe_opcode(instruction[31:26]), .PC_plus_4(branch_base_addr), .Shamt(instruction[10:6]), // from ifetch
         .ALUOp(ALUOp), .Sftmd(Sftmd), .ALUSrc(ALUSrc), .I_format(I_format), .Jr(Jr) // from controller
         );
 
