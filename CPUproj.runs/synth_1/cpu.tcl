@@ -16,9 +16,6 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param general.maxThreads 8
-set_param xicom.use_bs_reader 1
-set_msg_config -id {Common 17-41} -limit 10000000
 create_project -in_memory -part xc7a100tfgg484-1
 
 set_param project.singleFileAddWarning.threshold 0
@@ -44,9 +41,6 @@ read_verilog -library xil_defaultlib {
   D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/dmemory32.v
   D:/Digital/CPUproj/CPUproj.srcs/sources_1/new/cpu.v
 }
-read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom.xci
-set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_ooc.xdc]
-
 read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/cpuclk/cpuclk.xci
 set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/cpuclk/cpuclk_board.xdc]
 set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/cpuclk/cpuclk.xdc]
@@ -56,6 +50,9 @@ read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/uart_model/uart_mode
 
 read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM.xci
 set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_ooc.xdc]
+
+read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom.xci
+set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -68,8 +65,6 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc D:/Digital/CPUproj/CPUproj.srcs/constrs_1/new/constratint.xdc
 set_property used_in_implementation false [get_files D:/Digital/CPUproj/CPUproj.srcs/constrs_1/new/constratint.xdc]
 
-read_xdc dont_touch.xdc
-set_property used_in_implementation false [get_files dont_touch.xdc]
 
 synth_design -top cpu -part xc7a100tfgg484-1
 

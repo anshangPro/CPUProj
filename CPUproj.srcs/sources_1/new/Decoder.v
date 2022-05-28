@@ -45,7 +45,7 @@ module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
     output wire[31:0] t1, t2, t3;
     assign t1 = register[9];
     assign t2 = register[10];
-    assign t3 = register[11];
+    assign t3 = register[31];
 
     // register write
     always @(posedge clock, posedge reset) begin
@@ -62,7 +62,7 @@ module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
 
     always @* begin
         if(!RegDst) begin
-            if(Instruction[31:29] != 3'b001 | Instruction[28:26] == 3'b000 | Instruction[28:26] == 3'b010) begin
+            if(Instruction[31:29] != 3'b001 | Instruction[28:26] == 3'b000 | Instruction[28:26] == 3'b010 | Instruction[28:26] == 3'b010) begin
                 Sign_extend = {{16{Instruction[15]}}, Instruction[15:0]};
             end else begin
                 Sign_extend = {16'b0, Instruction[15:0]};

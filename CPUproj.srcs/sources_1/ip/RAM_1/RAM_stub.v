@@ -3,7 +3,8 @@
 // Tool Version: Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
 // Date        : Sat May 28 23:20:56 2022
 // Host        : LAPTOP-ANSHANG running 64-bit major release  (build 9200)
-// Command     : write_verilog -force -mode synth_stub D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.v
+// Command     : write_verilog -force -mode synth_stub -rename_top RAM -prefix
+//               RAM_ RAM_stub.v
 // Design      : RAM
 // Purpose     : Stub declaration of top-level module interface
 // Device      : xc7a100tfgg484-1
