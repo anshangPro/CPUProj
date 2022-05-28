@@ -16,7 +16,7 @@ proc create_report { reportName command } {
     send_msg_id runtcl-5 warning "$msg"
   }
 }
-set_param general.maxThreads 8
+set_param xicom.use_bs_reader 1
 set_param project.vivado.isBlockSynthRun true
 set_msg_config -msgmgr_mode ooc_run
 create_project -in_memory -part xc7a100tfgg484-1
@@ -33,8 +33,8 @@ set_property target_language Verilog [current_project]
 set_property ip_repo_paths d:/Digital/CPUproj/uart [current_project]
 set_property ip_output_repo d:/Digital/CPUproj/CPUproj.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
-read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM.xci
-set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_ooc.xdc]
+read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom.xci
+set_property used_in_implementation false [get_files -all d:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_ooc.xdc]
 
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -47,11 +47,11 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 read_xdc dont_touch.xdc
 set_property used_in_implementation false [get_files dont_touch.xdc]
 
-set cached_ip [config_ip_cache -export -no_bom -use_project_ipc -dir D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1 -new_name RAM -ip [get_ips RAM]]
+set cached_ip [config_ip_cache -export -no_bom -use_project_ipc -dir D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1 -new_name prgrom -ip [get_ips prgrom]]
 
 if { $cached_ip eq {} } {
 
-synth_design -top RAM -part xc7a100tfgg484-1 -mode out_of_context
+synth_design -top prgrom -part xc7a100tfgg484-1 -mode out_of_context
 
 #---------------------------------------------------------
 # Generate Checkpoint/Stub/Simulation Files For IP Cache
@@ -60,58 +60,58 @@ synth_design -top RAM -part xc7a100tfgg484-1 -mode out_of_context
 set_param constraints.enableBinaryConstraints false
 
 catch {
- write_checkpoint -force -noxdef -rename_prefix RAM_ RAM.dcp
+ write_checkpoint -force -noxdef -rename_prefix prgrom_ prgrom.dcp
 
  set ipCachedFiles {}
- write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ RAM_stub.v
- lappend ipCachedFiles RAM_stub.v
+ write_verilog -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ prgrom_stub.v
+ lappend ipCachedFiles prgrom_stub.v
 
- write_vhdl -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ RAM_stub.vhdl
- lappend ipCachedFiles RAM_stub.vhdl
+ write_vhdl -force -mode synth_stub -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ prgrom_stub.vhdl
+ lappend ipCachedFiles prgrom_stub.vhdl
 
- write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ RAM_sim_netlist.v
- lappend ipCachedFiles RAM_sim_netlist.v
+ write_verilog -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ prgrom_sim_netlist.v
+ lappend ipCachedFiles prgrom_sim_netlist.v
 
- write_vhdl -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ RAM_sim_netlist.vhdl
- lappend ipCachedFiles RAM_sim_netlist.vhdl
+ write_vhdl -force -mode funcsim -rename_top decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix -prefix decalper_eb_ot_sdeen_pot_pi_dehcac_xnilix_ prgrom_sim_netlist.vhdl
+ lappend ipCachedFiles prgrom_sim_netlist.vhdl
 
- config_ip_cache -add -dcp RAM.dcp -move_files $ipCachedFiles -use_project_ipc -ip [get_ips RAM]
+ config_ip_cache -add -dcp prgrom.dcp -move_files $ipCachedFiles -use_project_ipc -ip [get_ips prgrom]
 }
 
-rename_ref -prefix_all RAM_
+rename_ref -prefix_all prgrom_
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef RAM.dcp
-create_report "RAM_synth_1_synth_report_utilization_0" "report_utilization -file RAM_utilization_synth.rpt -pb RAM_utilization_synth.pb"
+write_checkpoint -force -noxdef prgrom.dcp
+create_report "prgrom_synth_1_synth_report_utilization_0" "report_utilization -file prgrom_utilization_synth.rpt -pb prgrom_utilization_synth.pb"
 
 if { [catch {
-  file copy -force D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1/RAM.dcp D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM.dcp
+  file copy -force D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1/prgrom.dcp D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  write_verilog -force -mode synth_stub D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.v
+  write_verilog -force -mode synth_stub D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode synth_stub D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.vhdl
+  write_vhdl -force -mode synth_stub D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_verilog -force -mode funcsim D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_sim_netlist.v
+  write_verilog -force -mode funcsim D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  write_vhdl -force -mode funcsim D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_sim_netlist.vhdl
+  write_vhdl -force -mode funcsim D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
@@ -121,46 +121,46 @@ if { [catch {
 
 
 if { [catch {
-  file copy -force D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1/RAM.dcp D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM.dcp
+  file copy -force D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1/prgrom.dcp D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom.dcp
 } _RESULT ] } { 
   send_msg_id runtcl-3 error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
   error "ERROR: Unable to successfully create or copy the sub-design checkpoint file."
 }
 
 if { [catch {
-  file rename -force D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1/RAM_stub.v D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.v
+  file rename -force D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1/prgrom_stub.v D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_stub.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a Verilog synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1/RAM_stub.vhdl D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.vhdl
+  file rename -force D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1/prgrom_stub.vhdl D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_stub.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create a VHDL synthesis stub for the sub-design. This may lead to errors in top level synthesis of the design. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1/RAM_sim_netlist.v D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_sim_netlist.v
+  file rename -force D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1/prgrom_sim_netlist.v D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_sim_netlist.v
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the Verilog functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 if { [catch {
-  file rename -force D:/Digital/CPUproj/CPUproj.runs/RAM_synth_1/RAM_sim_netlist.vhdl D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_sim_netlist.vhdl
+  file rename -force D:/Digital/CPUproj/CPUproj.runs/prgrom_synth_1/prgrom_sim_netlist.vhdl D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_sim_netlist.vhdl
 } _RESULT ] } { 
   puts "CRITICAL WARNING: Unable to successfully create the VHDL functional simulation sub-design file. Post-Synthesis Functional Simulation with this file may not be possible or may give incorrect results. Error reported: $_RESULT"
 }
 
 }; # end if cached_ip 
 
-if {[file isdir D:/Digital/CPUproj/CPUproj.ip_user_files/ip/RAM]} {
+if {[file isdir D:/Digital/CPUproj/CPUproj.ip_user_files/ip/prgrom]} {
   catch { 
-    file copy -force D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.v D:/Digital/CPUproj/CPUproj.ip_user_files/ip/RAM
+    file copy -force D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_stub.v D:/Digital/CPUproj/CPUproj.ip_user_files/ip/prgrom
   }
 }
 
-if {[file isdir D:/Digital/CPUproj/CPUproj.ip_user_files/ip/RAM]} {
+if {[file isdir D:/Digital/CPUproj/CPUproj.ip_user_files/ip/prgrom]} {
   catch { 
-    file copy -force D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM_stub.vhdl D:/Digital/CPUproj/CPUproj.ip_user_files/ip/RAM
+    file copy -force D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom_stub.vhdl D:/Digital/CPUproj/CPUproj.ip_user_files/ip/prgrom
   }
 }

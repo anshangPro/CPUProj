@@ -21,7 +21,7 @@
 
 
 module Ifetc32(Instruction, branch_base_addr, link_addr, clock, reset, Addr_result, Read_data_1, Branch, nBranch, Jmp, Jal, Jr, Zero,
-    upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i
+    upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i, Next_PC, PC
 );
 output[31:0] Instruction; // the instruction fetched from this module
 output[31:0] branch_base_addr; // (pc+4) to ALU which is used by branch type instruction
@@ -55,7 +55,7 @@ input upg_done_i; // 1 if program finished
 // 写回寄存器  posedge
 // 更新PC     negedge
 
-reg[31:0] PC, Next_PC;
+output reg[31:0] PC, Next_PC;
 
 //assign link_addr = (Jal==1 ? PC + 4 : link_addr);
 assign branch_base_addr = PC + 4;
