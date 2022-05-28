@@ -60,6 +60,7 @@ proc step_failed { step } {
   close $ch
 }
 
+set_msg_config -id {Common 17-41} -limit 10000000
 
 start_step init_design
 set ACTIVE_STEP init_design
@@ -77,8 +78,8 @@ set rc [catch {
   set_property ip_cache_permissions {read write} [current_project]
   set_property XPM_LIBRARIES {XPM_CDC XPM_MEMORY} [current_project]
   add_files -quiet D:/Digital/CPUproj/CPUproj.runs/synth_1/cpu.dcp
-  read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/cpuclk/cpuclk.xci
   read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/prgrom/prgrom.xci
+  read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/cpuclk/cpuclk.xci
   read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/uart_model/uart_model.xci
   read_ip -quiet D:/Digital/CPUproj/CPUproj.srcs/sources_1/ip/RAM_1/RAM.xci
   read_xdc D:/Digital/CPUproj/CPUproj.srcs/constrs_1/new/constratint.xdc

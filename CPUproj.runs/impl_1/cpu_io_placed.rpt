@@ -1,7 +1,7 @@
 Copyright 1986-2017 Xilinx, Inc. All Rights Reserved.
 -------------------------------------------------------------------------------------------------
 | Tool Version              : Vivado v.2017.4 (win64) Build 2086221 Fri Dec 15 20:55:39 MST 2017
-| Date                      : Fri May 27 16:49:43 2022
+| Date                      : Fri May 27 19:47:14 2022
 | Host                      : LAPTOP-ANSHANG running 64-bit major release  (build 9200)
 | Command                   : report_io -file cpu_io_placed.rpt
 | Design                    : cpu
@@ -336,9 +336,9 @@ Table of Contents
 | M13        | led[2]      | High Range | IO_L20P_T3_A20_15            | OUTPUT        | LVCMOS33    |      15 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | M14        |             | High Range | VCCO_14                      | VCCO          |             |      14 |            |      |                     |                      |    3.30 |            |           |          |      |                  |              |                   |              |
 | M15        | led[10]     | High Range | IO_L24P_T3_RS1_15            | OUTPUT        | LVCMOS33    |      15 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
-| M16        |             | High Range | IO_L24N_T3_RS0_15            | User IO       |             |      15 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
+| M16        | led[9]      | High Range | IO_L24N_T3_RS0_15            | OUTPUT        | LVCMOS33    |      15 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | M17        | led[8]      | High Range | IO_25_15                     | OUTPUT        | LVCMOS33    |      15 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
-| M18        | led[9]      | High Range | IO_L16P_T2_A28_15            | OUTPUT        | LVCMOS33    |      15 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
+| M18        |             | High Range | IO_L16P_T2_A28_15            | User IO       |             |      15 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
 | M19        |             |            | GND                          | GND           |             |         |            |      |                     |                      |     0.0 |            |           |          |      |                  |              |                   |              |
 | M20        | led[5]      | High Range | IO_L18N_T2_A23_15            | OUTPUT        | LVCMOS33    |      15 |         12 | SLOW |                     |            FP_VTT_50 |         | FIXED      |           |          |      | NONE             |              |                   |              |
 | M21        |             | High Range | IO_L10P_T1_AD11P_15          | User IO       |             |      15 |            |      |                     |                      |         |            |           |          |      |                  |              |                   |              |
