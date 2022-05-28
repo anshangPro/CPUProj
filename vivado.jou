@@ -1,0 +1,14 @@
+#-----------------------------------------------------------
+# Vivado v2017.4 (64-bit)
+# SW Build 2086221 on Fri Dec 15 20:55:39 MST 2017
+# IP Build 2085800 on Fri Dec 15 22:25:07 MST 2017
+# Start of session at: Sat May 28 16:18:22 2022
+# Process ID: 14500
+# Current directory: D:/CPUProj
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent21116 D:\CPUProj\CPUproj.xpr
+# Log file: D:/CPUProj/vivado.log
+# Journal file: D:/CPUProj\vivado.jou
+#-----------------------------------------------------------
+start_gui
+open_project D:/CPUProj/CPUproj.xpr
+update_compile_order -fileset sources_1
