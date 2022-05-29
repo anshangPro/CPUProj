@@ -24,12 +24,12 @@ module Ifetc32(Instruction, branch_base_addr, link_addr, clock, reset, Addr_resu
     upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i
 );
 output[31:0] Instruction; // the instruction fetched from this module
-output[31:0] branch_base_addr; // (pc+4) to ALU which is used by branch type instruction
-output reg[31:0] link_addr; // (pc+4) to Decoder which is used by jal instruction
+output reg [31:0] branch_base_addr; // (pc+4) to ALU which is used by branch type instruction
+output reg [31:0] link_addr; // (pc+4) to Decoder which is used by jal instruction
 input clock, reset; // Clock and reset
 
 // from ALU
-input[31:0] Addr_result; // the calculated address from ALU
+input[31:0] Addr_result; // the calculated address from ALU, used in Jump and Branches
 input Zero; // while Zero is 1, it means the ALUresult is zero
 
 // from Decoder
@@ -57,8 +57,20 @@ input upg_done_i; // 1 if program finished
 
 reg[31:0] PC, Next_PC;
 
+reg [31:0] pc_sync; // sync to posedge, used in debug
+
 //assign link_addr = (Jal==1 ? PC + 4 : link_addr);
-assign branch_base_addr = PC + 4;
+// assign branch_base_addr = PC + 4;
+// sync branch_base_addr to posedge
+always @(posedge clock, posedge reset) begin
+    if (reset) begin
+        branch_base_addr <= 32'b0;
+        pc_sync <= 32'b0;
+    end else begin
+        branch_base_addr <= PC + 4;
+        pc_sync <= PC;
+    end
+end
 
 always @* begin
     if(((Branch == 1) && (Zero == 1 )) || ((nBranch == 1) && (Zero == 0))) // beq, bne
@@ -68,15 +80,17 @@ always @* begin
     else Next_PC = PC + 4; // PC+4
 end
 
+wire [31:0] jump_address = {PC[31:28], Instruction[25:0], 2'b00};
+
 always @(negedge clock) begin
     if(reset == 1) begin
         PC <= 32'h0000_0000;
         link_addr <= 0;
     end else begin
         if (Jmp == 1) 
-            PC <= {PC[31:28], Instruction[25:0], 2'b00};
+            PC <= jump_address;
         else if (Jal == 1) begin
-            PC <= {PC[31:28], Instruction[25:0], 2'b00};
+            PC <= jump_address;
             link_addr <= PC + 4;
         end else 
             PC <= Next_PC;

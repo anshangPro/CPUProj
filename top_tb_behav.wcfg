@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="top_tb_behav.wdb" id="1">
+         <top_modules>
+            <top_module name="glbl" />
+            <top_module name="top_tb" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <zoom_setting>
+      <ZoomStartTime time="2944000000fs"></ZoomStartTime>
+      <ZoomEndTime time="4309000001fs"></ZoomEndTime>
+      <Cursor1Time time="3346000000fs"></Cursor1Time>
+   </zoom_setting>
+   <column_width_setting>
+      <NameColumnWidth column_width="203"></NameColumnWidth>
+      <ValueColumnWidth column_width="154"></ValueColumnWidth>
+   </column_width_setting>
+   <WVObjectSize size="6" />
+   <wvobject fp_name="/top_tb/clk_out" type="logic">
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="ElementShortName">clk_out</obj_property>
+      <obj_property name="ObjectShortName">clk_out</obj_property>
+      <obj_property name="label">sys_clk</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_tb/fpga_rst" type="logic">
+      <obj_property name="ElementShortName">fpga_rst</obj_property>
+      <obj_property name="ObjectShortName">fpga_rst</obj_property>
+   </wvobject>
+   <wvobject fp_name="group46" type="group">
+      <obj_property name="label">Fetch</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/top_tb/ifetch/pc_sync" type="array">
+         <obj_property name="ElementShortName">pc_sync[31:0]</obj_property>
+         <obj_property name="ObjectShortName">pc_sync[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/ifetch/Instruction" type="array">
+         <obj_property name="ElementShortName">Instruction[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Instruction[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/ifetch/PC" type="array">
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="ElementShortName">PC[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PC[31:0]</obj_property>
+         <obj_property name="label">internal PC</obj_property>
+      </wvobject>
+      <wvobject fp_name="group56" type="group">
+         <obj_property name="label">jump</obj_property>
+         <obj_property name="DisplayName">label</obj_property>
+         <obj_property name="isExpanded"></obj_property>
+         <wvobject fp_name="/top_tb/ifetch/Zero" type="logic">
+            <obj_property name="ElementShortName">Zero</obj_property>
+            <obj_property name="ObjectShortName">Zero</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/Branch" type="logic">
+            <obj_property name="ElementShortName">Branch</obj_property>
+            <obj_property name="ObjectShortName">Branch</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/nBranch" type="logic">
+            <obj_property name="ElementShortName">nBranch</obj_property>
+            <obj_property name="ObjectShortName">nBranch</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/Addr_result" type="array">
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="ElementShortName">Addr_result[31:0]</obj_property>
+            <obj_property name="ObjectShortName">Addr_result[31:0]</obj_property>
+            <obj_property name="label">branch_addr</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/Jal" type="logic">
+            <obj_property name="ElementShortName">Jal</obj_property>
+            <obj_property name="ObjectShortName">Jal</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/Jmp" type="logic">
+            <obj_property name="ElementShortName">Jmp</obj_property>
+            <obj_property name="ObjectShortName">Jmp</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/jump_address" type="array">
+            <obj_property name="ElementShortName">jump_address[31:0]</obj_property>
+            <obj_property name="ObjectShortName">jump_address[31:0]</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/Jr" type="logic">
+            <obj_property name="ElementShortName">Jr</obj_property>
+            <obj_property name="ObjectShortName">Jr</obj_property>
+         </wvobject>
+         <wvobject fp_name="/top_tb/ifetch/Read_data_1" type="array">
+            <obj_property name="DisplayName">label</obj_property>
+            <obj_property name="ElementShortName">Read_data_1[31:0]</obj_property>
+            <obj_property name="ObjectShortName">Read_data_1[31:0]</obj_property>
+            <obj_property name="label">jr_addr</obj_property>
+         </wvobject>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group155" type="group">
+      <obj_property name="label">Controller</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/top_tb/controller/Opcode" type="array">
+         <obj_property name="ElementShortName">Opcode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">Opcode[5:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/controller/Function_opcode" type="array">
+         <obj_property name="ElementShortName">Function_opcode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">Function_opcode[5:0]</obj_property>
+         <obj_property name="Radix">BINARYRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/controller/RegDST" type="logic">
+         <obj_property name="ElementShortName">RegDST</obj_property>
+         <obj_property name="ObjectShortName">RegDST</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/controller/ALUSrc" type="logic">
+         <obj_property name="ElementShortName">ALUSrc</obj_property>
+         <obj_property name="ObjectShortName">ALUSrc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/controller/MemtoReg" type="logic">
+         <obj_property name="ElementShortName">MemtoReg</obj_property>
+         <obj_property name="ObjectShortName">MemtoReg</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/controller/RegWrite" type="logic">
+         <obj_property name="ElementShortName">RegWrite</obj_property>
+         <obj_property name="ObjectShortName">RegWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/controller/MemWrite" type="logic">
+         <obj_property name="ElementShortName">MemWrite</obj_property>
+         <obj_property name="ObjectShortName">MemWrite</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group119" type="group">
+      <obj_property name="label">decoder</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/top_tb/decoder/read_data_1" type="array">
+         <obj_property name="ElementShortName">read_data_1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">read_data_1[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/decoder/read_data_2" type="array">
+         <obj_property name="ElementShortName">read_data_2[31:0]</obj_property>
+         <obj_property name="ObjectShortName">read_data_2[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/decoder/Jal" type="logic">
+         <obj_property name="ElementShortName">Jal</obj_property>
+         <obj_property name="ObjectShortName">Jal</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/decoder/RegWrite" type="logic">
+         <obj_property name="ElementShortName">RegWrite</obj_property>
+         <obj_property name="ObjectShortName">RegWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/decoder/reg_dst" type="array">
+         <obj_property name="ElementShortName">reg_dst[4:0]</obj_property>
+         <obj_property name="ObjectShortName">reg_dst[4:0]</obj_property>
+         <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/decoder/register_write_data" type="array">
+         <obj_property name="ElementShortName">register_write_data[31:0]</obj_property>
+         <obj_property name="ObjectShortName">register_write_data[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/decoder/register" type="array">
+         <obj_property name="ElementShortName">register[31:0][31:0]</obj_property>
+         <obj_property name="ObjectShortName">register[31:0][31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="group172" type="group">
+      <obj_property name="label">ALU</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/top_tb/alu/Sign_extend" type="array">
+         <obj_property name="ElementShortName">Sign_extend[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Sign_extend[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Read_data_1" type="array">
+         <obj_property name="ElementShortName">Read_data_1[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Read_data_1[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Read_data_2" type="array">
+         <obj_property name="ElementShortName">Read_data_2[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Read_data_2[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Function_opcode" type="array">
+         <obj_property name="ElementShortName">Function_opcode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">Function_opcode[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Exe_opcode" type="array">
+         <obj_property name="ElementShortName">Exe_opcode[5:0]</obj_property>
+         <obj_property name="ObjectShortName">Exe_opcode[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/PC_plus_4" type="array">
+         <obj_property name="ElementShortName">PC_plus_4[31:0]</obj_property>
+         <obj_property name="ObjectShortName">PC_plus_4[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Shamt" type="array">
+         <obj_property name="ElementShortName">Shamt[4:0]</obj_property>
+         <obj_property name="ObjectShortName">Shamt[4:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/ALUOp" type="array">
+         <obj_property name="ElementShortName">ALUOp[1:0]</obj_property>
+         <obj_property name="ObjectShortName">ALUOp[1:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Sftmd" type="logic">
+         <obj_property name="ElementShortName">Sftmd</obj_property>
+         <obj_property name="ObjectShortName">Sftmd</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/ALUSrc" type="logic">
+         <obj_property name="ElementShortName">ALUSrc</obj_property>
+         <obj_property name="ObjectShortName">ALUSrc</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/I_format" type="logic">
+         <obj_property name="ElementShortName">I_format</obj_property>
+         <obj_property name="ObjectShortName">I_format</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Jr" type="logic">
+         <obj_property name="ElementShortName">Jr</obj_property>
+         <obj_property name="ObjectShortName">Jr</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Zero" type="logic">
+         <obj_property name="ElementShortName">Zero</obj_property>
+         <obj_property name="ObjectShortName">Zero</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/ALU_Result" type="array">
+         <obj_property name="ElementShortName">ALU_Result[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_Result[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Addr_Result" type="array">
+         <obj_property name="ElementShortName">Addr_Result[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Addr_Result[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Exe_code" type="array">
+         <obj_property name="ElementShortName">Exe_code[5:0]</obj_property>
+         <obj_property name="ObjectShortName">Exe_code[5:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/ALU_ctl" type="array">
+         <obj_property name="ElementShortName">ALU_ctl[2:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_ctl[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Ainput" type="array">
+         <obj_property name="ElementShortName">Ainput[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Ainput[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Binput" type="array">
+         <obj_property name="ElementShortName">Binput[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Binput[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/ALU_output_mux" type="array">
+         <obj_property name="ElementShortName">ALU_output_mux[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_output_mux[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Sftm" type="array">
+         <obj_property name="ElementShortName">Sftm[2:0]</obj_property>
+         <obj_property name="ObjectShortName">Sftm[2:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Shift_Result" type="array">
+         <obj_property name="ElementShortName">Shift_Result[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Shift_Result[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+</wave_config>

@@ -122,6 +122,7 @@ module top_tb();
     // controller
     control32 controller(
     .Opcode(instruction[31:26]), .Function_opcode(instruction[5:0]), // from ifetch
+    .RD_id(instruction[15:11]),
     .Jr(Jr), .RegDST(RegDST), .ALUSrc(ALUSrc), .MemtoReg(MemtoReg), .RegWrite(RegWrite), .MemWrite(MemWrite),
     .Branch(Branch), .nBranch(nBranch), .Jmp(Jmp), .Jal(Jal), .I_format(I_format), .Sftmd(Sftmd), .ALUOp(ALUOp)
     );

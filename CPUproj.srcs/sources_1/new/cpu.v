@@ -83,7 +83,7 @@ module cpu(input fpga_rst,
 
     // controller
     control32 controller(
-        .Opcode(instruction[31:26]), .Function_opcode(instruction[5:0]), // from ifetch
+        .Opcode(instruction[31:26]), .Function_opcode(instruction[5:0]), .RD_id(instruction[15:11]), // from ifetch
         .Jr(Jr), .RegDST(RegDST), .ALUSrc(ALUSrc), .MemtoReg(MemtoReg), .RegWrite(RegWrite), .MemWrite(MemWrite),
         .Branch(Branch), .nBranch(nBranch), .Jmp(Jmp), .Jal(Jal), .I_format(I_format), .Sftmd(Sftmd), .ALUOp(ALUOp)
         );

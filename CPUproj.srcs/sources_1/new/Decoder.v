@@ -47,29 +47,38 @@ module decode32(read_data_1,read_data_2,Instruction,mem_data,ALU_result,
     assign t2 = register[10];
     assign t3 = register[31];
 
+    wire [4:0] rt_id = Instruction[20:16];
+    wire [4:0] rd_id = Instruction[15:11];
+    wire [4:0] reg_dst = RegDst ? rd_id : rt_id;
+
+    wire [31:0] register_write_data = MemtoReg ? mem_data: ALU_result;
+
     // register write
     always @(posedge clock, posedge reset) begin
         if(reset) begin
             for(iTemp = 0; iTemp < 32; iTemp = iTemp+1) begin
-                register[iTemp] = 0;
+                register[iTemp] <= 0;
             end
         end else if(Jal) begin
-            register[31] = opcplus4;
-        end else if(RegWrite) begin
-            register[RegDst ? Instruction[15:11] : Instruction[20:16]] = MemtoReg ? mem_data: ALU_result;
+            register[31] <= opcplus4;
+        end else if(RegWrite && reg_dst != 5'b0) begin
+            register[reg_dst] <= register_write_data;
         end
     end
 
+    wire [5:0] Opcode = Instruction[31:26];
+    wire zero_ext = Opcode[5:2] == 4'b0011;
+    // Use zero ext in andi, ori, xori, lui
     always @* begin
-        if(!RegDst) begin
-            if(Instruction[31:29] != 3'b001 | Instruction[28:26] == 3'b000 | Instruction[28:26] == 3'b010 | Instruction[28:26] == 3'b010) begin
+        // if(!RegDst) begin
+            if(!zero_ext) begin
                 Sign_extend = {{16{Instruction[15]}}, Instruction[15:0]};
             end else begin
                 Sign_extend = {16'b0, Instruction[15:0]};
             end
-        end  else begin
-            Sign_extend = 0;
-        end
+        // end  else begin
+        //     Sign_extend = 0;
+        // end
     end
 
     // 0拓展
