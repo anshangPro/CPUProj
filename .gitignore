@@ -1,12 +1,12 @@
-# /CPUproj.cache
-# /CPUproj.hw
-# /CPUproj.ip_user_files
-# /CPUproj.runs
-# /CPUproj.sim
-# /CPUproj.gen
-# *.str
-# *.jou
-# *.log
+/CPUproj.cache
+/CPUproj.hw
+/CPUproj.ip_user_files
+/CPUproj.runs
+/CPUproj.sim
+/CPUproj.gen
+*.str
+*.jou
+*.log
 #########################################################################################################
 ##	This is an example .gitignore file for Vivado, please treat it as an example as 
 ##	it might not be complete. In addition, XAPP 1165 should be followed.
