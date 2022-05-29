@@ -47,6 +47,11 @@ module top_tb();
         #100 sw = 0;
         #100 sw = 24'hff0;
     end
+
+    initial begin
+        mode = 1;
+        #10 mode = 0;
+    end
     
     //        output [7:0] seg_out,
     //    output [7:0] seg_en

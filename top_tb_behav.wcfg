@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="2944000000fs"></ZoomStartTime>
-      <ZoomEndTime time="4309000001fs"></ZoomEndTime>
-      <Cursor1Time time="3346000000fs"></Cursor1Time>
+      <ZoomStartTime time="0fs"></ZoomStartTime>
+      <ZoomEndTime time="5000000001fs"></ZoomEndTime>
+      <Cursor1Time time="2595000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="203"></NameColumnWidth>
-      <ValueColumnWidth column_width="154"></ValueColumnWidth>
+      <ValueColumnWidth column_width="146"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="6" />
+   <WVObjectSize size="9" />
    <wvobject fp_name="/top_tb/clk_out" type="logic">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">clk_out</obj_property>
@@ -97,7 +97,6 @@
    <wvobject fp_name="group155" type="group">
       <obj_property name="label">Controller</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/top_tb/controller/Opcode" type="array">
          <obj_property name="ElementShortName">Opcode[5:0]</obj_property>
          <obj_property name="ObjectShortName">Opcode[5:0]</obj_property>
@@ -161,12 +160,12 @@
       <wvobject fp_name="/top_tb/decoder/register" type="array">
          <obj_property name="ElementShortName">register[31:0][31:0]</obj_property>
          <obj_property name="ObjectShortName">register[31:0][31:0]</obj_property>
+         <obj_property name="isExpanded"></obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group172" type="group">
       <obj_property name="label">ALU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/top_tb/alu/Sign_extend" type="array">
          <obj_property name="ElementShortName">Sign_extend[31:0]</obj_property>
          <obj_property name="ObjectShortName">Sign_extend[31:0]</obj_property>
@@ -254,6 +253,71 @@
       <wvobject fp_name="/top_tb/alu/Shift_Result" type="array">
          <obj_property name="ElementShortName">Shift_Result[31:0]</obj_property>
          <obj_property name="ObjectShortName">Shift_Result[31:0]</obj_property>
+      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/top_tb/sw" type="array">
+      <obj_property name="ElementShortName">sw[23:0]</obj_property>
+      <obj_property name="ObjectShortName">sw[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_tb/led" type="array">
+      <obj_property name="ElementShortName">led[23:0]</obj_property>
+      <obj_property name="ObjectShortName">led[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="group170" type="group">
+      <obj_property name="label">data-RAM</obj_property>
+      <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
+      <wvobject fp_name="/top_tb/dataRAM/rst" type="logic">
+         <obj_property name="ElementShortName">rst</obj_property>
+         <obj_property name="ObjectShortName">rst</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/clock" type="logic">
+         <obj_property name="ElementShortName">clock</obj_property>
+         <obj_property name="ObjectShortName">clock</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/memWrite" type="logic">
+         <obj_property name="ElementShortName">memWrite</obj_property>
+         <obj_property name="ObjectShortName">memWrite</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/address" type="array">
+         <obj_property name="ElementShortName">address[31:0]</obj_property>
+         <obj_property name="ObjectShortName">address[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/writeData" type="array">
+         <obj_property name="ElementShortName">writeData[31:0]</obj_property>
+         <obj_property name="ObjectShortName">writeData[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/readData" type="array">
+         <obj_property name="ElementShortName">readData[31:0]</obj_property>
+         <obj_property name="ObjectShortName">readData[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/sw" type="array">
+         <obj_property name="ElementShortName">sw[23:0]</obj_property>
+         <obj_property name="ObjectShortName">sw[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/led" type="array">
+         <obj_property name="ElementShortName">led[23:0]</obj_property>
+         <obj_property name="ObjectShortName">led[23:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/upg_rst_i" type="logic">
+         <obj_property name="ElementShortName">upg_rst_i</obj_property>
+         <obj_property name="ObjectShortName">upg_rst_i</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/kickOff" type="logic">
+         <obj_property name="ElementShortName">kickOff</obj_property>
+         <obj_property name="ObjectShortName">kickOff</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/readDataMem" type="array">
+         <obj_property name="ElementShortName">readDataMem[31:0]</obj_property>
+         <obj_property name="ObjectShortName">readDataMem[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/outter" type="logic">
+         <obj_property name="ElementShortName">outter</obj_property>
+         <obj_property name="ObjectShortName">outter</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/dataRAM/clk" type="logic">
+         <obj_property name="ElementShortName">clk</obj_property>
+         <obj_property name="ObjectShortName">clk</obj_property>
       </wvobject>
    </wvobject>
 </wave_config>
