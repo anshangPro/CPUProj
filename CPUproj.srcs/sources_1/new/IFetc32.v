@@ -20,7 +20,8 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Ifetc32(Instruction, branch_base_addr, link_addr, clock, reset, Addr_result, Read_data_1, Branch, nBranch, Jmp, Jal, Jr, Zero,
+module Ifetc32(Instruction, branch_base_addr, link_addr, clock, reset, Read_data_1, Branch, nBranch, Jmp, Jal, Jr, 
+    Do_Branch, Branch_Address,
     upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i
 );
 output[31:0] Instruction; // the instruction fetched from this module
@@ -29,8 +30,8 @@ output reg [31:0] link_addr; // (pc+4) to Decoder which is used by jal instructi
 input clock, reset; // Clock and reset
 
 // from ALU
-input[31:0] Addr_result; // the calculated address from ALU, used in Jump and Branches
-input Zero; // while Zero is 1, it means the ALUresult is zero
+input[31:0] Branch_Address; // the calculated address from ALU, used in Jump and Branches
+input Do_Branch;             // while Zero is 1, it means the ALUresult is zero
 
 // from Decoder
 input[31:0] Read_data_1; // the address of instruction used by jr instruction
@@ -72,15 +73,16 @@ always @(posedge clock, posedge reset) begin
     end
 end
 
+
+wire [31:0] jump_address = {PC[31:28], Instruction[25:0], 2'b00};
+
 always @* begin
-    if(((Branch == 1) && (Zero == 1 )) || ((nBranch == 1) && (Zero == 0))) // beq, bne
-        Next_PC = Addr_result; // the calculated new value for PC
+    if (Do_Branch) // beq, bne
+        Next_PC = Branch_Address; // the calculated new value for PC
     else if(Jr == 1)
         Next_PC = Read_data_1;  // the value of $31 register
     else Next_PC = PC + 4; // PC+4
 end
-
-wire [31:0] jump_address = {PC[31:28], Instruction[25:0], 2'b00};
 
 always @(negedge clock) begin
     if(reset == 1) begin

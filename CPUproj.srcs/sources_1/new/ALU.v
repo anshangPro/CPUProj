@@ -21,7 +21,7 @@
 
 
 module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,ALUOp,
-                 Shamt,ALUSrc,I_format,Zero,Jr,Sftmd,ALU_Result,Addr_Result,PC_plus_4
+                 Shamt,ALUSrc,I_format,Jr,Sftmd,ALU_Result,Do_Branch,Branch_Address,PC_plus_4
                  );
     //from Decoder
     input[31:0]  Read_data_1;		// 从译码单元的Read_data_1中来
@@ -44,9 +44,9 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
     input        Jr;               // 来自控制单元，表明是JR指令
 
     //output
-    output       Zero;              // 为1表明计算值为0 
-    output reg[31:0] ALU_Result;        // 计算的数据结果
-    output [31:0] Addr_Result;		// 计算的地址结果   
+    output reg    Do_Branch;              // 是否做branch跳转
+    output [31:0] Branch_Address;		    // branch跳转的地址   
+    output reg [31:0] ALU_Result;        // 计算的数据结果
   
     wire[5:0] Exe_code;
     assign Exe_code = (I_format==0) ? Function_opcode : { 3'b000 , Exe_opcode[2:0] };
@@ -145,7 +145,19 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
             ALU_Result = ALU_output_mux;
     end
 
-    assign Zero = (ALU_output_mux == 32'b0);
-    assign Addr_Result = ($signed(Sign_extend) <<< 2) + PC_plus_4;
+    assign Branch_Address = ($signed(Sign_extend) <<< 2) + PC_plus_4;
+    // Branch, beq, bne, blez, bgtz
+    always @* begin
+        if (Exe_opcode[5:2] == 4'b0001) begin
+            case(Exe_opcode[1:0])
+                2'b00: Do_Branch = Read_data_1 == Read_data_2;
+                2'b01: Do_Branch = ~(Read_data_1 == Read_data_2);
+                2'b10: Do_Branch = $signed(Read_data_1) <= 0 ;
+                2'b11: Do_Branch = $signed(Read_data_1) > 0;
+            endcase
+        end else begin
+            Do_Branch = 0;
+        end
+    end
 
 endmodule
