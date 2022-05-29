@@ -125,6 +125,7 @@ module top_tb();
         #10000 sw = 24'b1000_0000_0000_0011_0000_0001;
         
     end
+
     
     //        output [7:0] seg_out,
     //    output [7:0] seg_en
