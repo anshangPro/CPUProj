@@ -1,9 +1,9 @@
-/CPUproj.cache
-/CPUproj.hw
-/CPUproj.ip_user_files
-/CPUproj.runs
-/CPUproj.sim
-/CPUproj.gen
+CPUproj.cache/
+CPUproj.hw/
+CPUproj.ip_user_files/
+CPUproj.runs/
+CPUproj.sim/
+CPUproj.gen/
 *.str
 *.jou
 *.log
