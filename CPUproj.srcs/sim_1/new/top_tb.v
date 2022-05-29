@@ -83,8 +83,8 @@ module top_tb();
     // decoder
     wire[31:0] read_data_1, read_data_2, Sign_extend;
     // alu
-    wire Zero;
-    wire[31:0] ALU_Result, Addr_Result;
+    wire Do_Branch;
+    wire[31:0] ALU_Result, Branch_Address;
     // data RAM
     wire[31:0] data_from_ram;
     //uart    TODO   upg_rst_i define
@@ -118,7 +118,7 @@ module top_tb();
     Ifetc32 ifetch(
     .clock(clk_out), .reset(fpga_rst | ~mode),
     .Instruction(instruction), .branch_base_addr(branch_base_addr), .link_addr(link_addr),
-    .Addr_result(Addr_Result), .Zero(Zero), // from alu
+    .Branch_Address(Branch_Address), .Do_Branch(Do_Branch), // from alu
     .Read_data_1(read_data_1), // from decoder
     .Branch(Branch), .nBranch(nBranch), .Jmp(Jmp), .Jal(Jal), .Jr(Jr), // from controller
     .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & (!upg_adr_i[14])), .upg_adr_i(upg_adr_i), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i) // from uart
@@ -145,7 +145,7 @@ module top_tb();
     
     // alu
     executs32 alu(
-    .Zero(Zero), .ALU_Result(ALU_Result), .Addr_Result(Addr_Result),
+    .Do_Branch(Do_Branch), .ALU_Result(ALU_Result), .Branch_Address(Branch_Address),
     .Read_data_1(read_data_1), .Read_data_2(read_data_2), .Sign_extend(Sign_extend), // from decoder
     .Function_opcode(instruction[5:0]), .Exe_opcode(instruction[31:26]), .PC_plus_4(branch_base_addr), .Shamt(instruction[10:6]), // from ifetch
     .ALUOp(ALUOp), .Sftmd(Sftmd), .ALUSrc(ALUSrc), .I_format(I_format), .Jr(Jr) // from controller
