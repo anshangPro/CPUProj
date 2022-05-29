@@ -97,3 +97,15 @@ CPUproj.gen/
 #COE files and c
 #########
 !CPUproj.srcs/code/*
+CPUproj.runs/RAM_synth_1/vivado.pb
+CPUproj.runs/cpuclk_synth_1/vivado.pb
+CPUproj.runs/impl_1/init_design.pb
+CPUproj.runs/impl_1/opt_design.pb
+CPUproj.runs/impl_1/place_design.pb
+CPUproj.runs/impl_1/route_design.pb
+CPUproj.runs/impl_1/write_bitstream.pb
+CPUproj.runs/prgrom_synth_1/vivado.pb
+CPUproj.runs/synth_1/vivado.pb
+CPUproj.runs/uart_model_synth_1/vivado.pb
+CPUproj.sim/sim_1/behav/xsim/xelab.pb
+CPUproj.hw/hw_1/hw.xml
