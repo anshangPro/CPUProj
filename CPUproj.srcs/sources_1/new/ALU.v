@@ -130,10 +130,17 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
             Shift_Result = Binput;
     end
 
+    wire Slt_Op = ((ALU_ctl==3'b111) && (Exe_code[3]==1)) || (I_format && (ALU_ctl[2:1]==2'b11));
     always @* begin
         //set type operation (slt, slti, sltu, sltiu)
-        if( ((ALU_ctl==3'b111) && (Exe_code[3]==1)) || (I_format && (ALU_ctl[2:1]==2'b11)))
-            ALU_Result = $signed(Ainput) - $signed(Binput)<0;
+        if(Slt_Op)
+            begin
+            if(Function_opcode[0] == 0) begin
+                ALU_Result = $signed(Ainput) - $signed(Binput)<0;
+            end
+            else
+                ALU_Result = $unsigned(Ainput) - $unsigned(Binput)<0;
+        end
         // //lui operation
         else if((ALU_ctl==3'b101) && (I_format==1))
             ALU_Result[31:0]= ALU_output_mux;

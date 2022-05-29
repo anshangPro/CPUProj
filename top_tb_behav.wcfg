@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="1960000000fs"></ZoomStartTime>
-      <ZoomEndTime time="2710000001fs"></ZoomEndTime>
-      <Cursor1Time time="2450000000fs"></Cursor1Time>
+      <ZoomStartTime time="725833000000fs"></ZoomStartTime>
+      <ZoomEndTime time="727206000001fs"></ZoomEndTime>
+      <Cursor1Time time="726242000000fs"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="203"></NameColumnWidth>
-      <ValueColumnWidth column_width="150"></ValueColumnWidth>
+      <ValueColumnWidth column_width="146"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="6" />
+   <WVObjectSize size="8" />
    <wvobject fp_name="/top_tb/clk_out" type="logic">
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="ElementShortName">clk_out</obj_property>
@@ -87,7 +87,6 @@
    <wvobject fp_name="group155" type="group">
       <obj_property name="label">Controller</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/top_tb/controller/Opcode" type="array">
          <obj_property name="ElementShortName">Opcode[5:0]</obj_property>
          <obj_property name="ObjectShortName">Opcode[5:0]</obj_property>
@@ -122,7 +121,6 @@
    <wvobject fp_name="group119" type="group">
       <obj_property name="label">decoder</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/top_tb/decoder/read_data_1" type="array">
          <obj_property name="ElementShortName">read_data_1[31:0]</obj_property>
          <obj_property name="ObjectShortName">read_data_1[31:0]</obj_property>
@@ -157,10 +155,6 @@
       <obj_property name="label">ALU</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/top_tb/alu/Sign_extend" type="array">
-         <obj_property name="ElementShortName">Sign_extend[31:0]</obj_property>
-         <obj_property name="ObjectShortName">Sign_extend[31:0]</obj_property>
-      </wvobject>
       <wvobject fp_name="/top_tb/alu/Read_data_1" type="array">
          <obj_property name="ElementShortName">Read_data_1[31:0]</obj_property>
          <obj_property name="ObjectShortName">Read_data_1[31:0]</obj_property>
@@ -168,6 +162,14 @@
       <wvobject fp_name="/top_tb/alu/Read_data_2" type="array">
          <obj_property name="ElementShortName">Read_data_2[31:0]</obj_property>
          <obj_property name="ObjectShortName">Read_data_2[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/Sign_extend" type="array">
+         <obj_property name="ElementShortName">Sign_extend[31:0]</obj_property>
+         <obj_property name="ObjectShortName">Sign_extend[31:0]</obj_property>
+      </wvobject>
+      <wvobject fp_name="/top_tb/alu/ALU_Result" type="array">
+         <obj_property name="ElementShortName">ALU_Result[31:0]</obj_property>
+         <obj_property name="ObjectShortName">ALU_Result[31:0]</obj_property>
       </wvobject>
       <wvobject fp_name="/top_tb/alu/Function_opcode" type="array">
          <obj_property name="ElementShortName">Function_opcode[5:0]</obj_property>
@@ -205,10 +207,6 @@
          <obj_property name="ElementShortName">Jr</obj_property>
          <obj_property name="ObjectShortName">Jr</obj_property>
       </wvobject>
-      <wvobject fp_name="/top_tb/alu/ALU_Result" type="array">
-         <obj_property name="ElementShortName">ALU_Result[31:0]</obj_property>
-         <obj_property name="ObjectShortName">ALU_Result[31:0]</obj_property>
-      </wvobject>
       <wvobject fp_name="/top_tb/alu/Exe_code" type="array">
          <obj_property name="ElementShortName">Exe_code[5:0]</obj_property>
          <obj_property name="ObjectShortName">Exe_code[5:0]</obj_property>
@@ -237,5 +235,13 @@
          <obj_property name="ElementShortName">Shift_Result[31:0]</obj_property>
          <obj_property name="ObjectShortName">Shift_Result[31:0]</obj_property>
       </wvobject>
+   </wvobject>
+   <wvobject fp_name="/top_tb/sw" type="array">
+      <obj_property name="ElementShortName">sw[23:0]</obj_property>
+      <obj_property name="ObjectShortName">sw[23:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/top_tb/led" type="array">
+      <obj_property name="ElementShortName">led[23:0]</obj_property>
+      <obj_property name="ObjectShortName">led[23:0]</obj_property>
    </wvobject>
 </wave_config>
