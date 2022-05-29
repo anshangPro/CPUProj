@@ -16,4 +16,4 @@ CPUproj.runs/synth_1/vivado.pb
 CPUproj.runs/uart_model_synth_1/vivado.pb
 CPUproj.sim/sim_1/behav/xsim/xelab.pb
 CPUproj.hw/hw_1/hw.xml
-CPUproj.src/sources_1/ip/*
+CPUproj.srcs/sources_1/ip/
