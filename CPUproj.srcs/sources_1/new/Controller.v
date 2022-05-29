@@ -32,11 +32,11 @@ module control32(
     output MemWrite, // 1 indicate write data memory, otherwise it's not
     output Branch, // 1 indicate the instruction is "beq" , otherwise it's not
     output nBranch, // 1 indicate the instruction is "bne", otherwise it's not
-    output Jmp, // �?1表明是J指令, �?0时表示不是J指令
+    output Jmp, // 为1表明是J指令, 为0时表示不是J指令
     output Jal, // 1 indicate the instruction is "jal", otherwise it's not
-    output I_format, // �?1表明该指令是除beq, bne, LW, SW之外的其他I-类型指令
+    output I_format, // 为1表明该指令是除beq, bne, LW, SW之外的其他I-类型指令
     output Sftmd, // 1 indicate the instruction is shift 
-    output[1:0] ALUOp // 是R-类型或I_format=1时位1（高bit位）�?1,  beq、bne指令则位0（低bit位）�?1
+    output[1:0] ALUOp // 是R-类型或I_format=1时位1（高bit位）为1,  beq、bne指令则位0（低bit位）为1
     );
 
     assign Jr = (Function_opcode == 6'b001000 || (Function_opcode == 6'b001001 && RD_id == 5'b0)) & (Opcode == 0);
