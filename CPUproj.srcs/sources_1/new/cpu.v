@@ -57,8 +57,8 @@ module cpu(input fpga_rst,
 
     wire mode_stable, enter_stable;
 
-    debounce rst_debounce(fpga_clk, fpga_rst, mode_switch, mode_stable);
-    debounce enter_debounce(fpga_clk,fpga_rst, enter, enter_stable);
+    debounce rst_debounce(upg_clk_10mhz, fpga_rst, mode_switch, mode_stable);
+    debounce enter_debounce(upg_clk_10mhz, fpga_rst, enter, enter_stable);
 
     always @(posedge mode_stable) begin
     mode = mode + 1;

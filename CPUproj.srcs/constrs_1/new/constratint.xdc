@@ -1,8 +1,8 @@
 # constratints of the project
 
 # constraint of enter
-set_property IOSTANDARD LVCMOS33 [get_ports {enter}]
-set_property PACKAGE_PIN R1 [get_ports enter]
+set_property IOSTANDARD LVCMOS33 [get_ports enter]
+set_property PACKAGE_PIN P2 [get_ports enter]
 
 
 # the constraints of the uart

@@ -17,7 +17,7 @@ module debounce(
             key_out <= 0;
         end
         else begin
-            if(cnt == 14'd10000) begin  
+            if(cnt == 14'd250000) begin  
                 cnt <= 0;
                 change <= 0;
             end else begin
