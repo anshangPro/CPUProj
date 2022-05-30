@@ -59,6 +59,7 @@ module cpu(input fpga_rst,
 
     debounce rst_debounce(upg_clk_10mhz, fpga_rst, mode_switch, mode_stable);
     debounce enter_debounce(upg_clk_10mhz, fpga_rst, enter, enter_stable);
+    exciting enter_exciting(clk_out, enter_stable, enter_short);
 
     always @(posedge mode_stable) begin
     mode = mode + 1;
@@ -117,7 +118,7 @@ module cpu(input fpga_rst,
         .writeData(read_data_2), // from decoder
         .memWrite(MemWrite), // from controller
         .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i[13:0]), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
-        .sw(sw), .led(led_in), .enter(enter_stable)
+        .sw(sw), .led(led_in), .enter(enter_short)
         );
     
     
