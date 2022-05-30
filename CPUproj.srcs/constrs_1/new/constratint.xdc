@@ -1,5 +1,9 @@
 # constratints of the project
 
+# constraint of enter
+set_property IOSTANDARD LVCMOS33 [get_ports {enter}]
+set_property PACKAGE_PIN R1 [get_ports enter]
+
 
 # the constraints of the uart
 set_property -dict {IOSTANDARD LVCMOS33 PACKAGE_PIN Y19} [get_ports rx]

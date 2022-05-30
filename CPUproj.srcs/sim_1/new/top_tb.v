@@ -33,6 +33,8 @@ module top_tb();
     always begin
         #5 fpga_clk = ~fpga_clk;
     end
+
+    wire enter;  
     
     initial begin
         fpga_clk    = 0;
@@ -43,7 +45,7 @@ module top_tb();
         
         #10 fpga_rst = 0;
 
-        #10000 sw = 24'b0000_0000_0000_0000_0000_0000;
+        #10000 sw = 24'b0000_0000_0000_0000_0000_0001;
         #10000 sw = 24'b1000_0000_0000_0001_0000_0000;
         #10000 sw = 24'b1000_0000_0000_0001_0000_0001;
         #10000 sw = 24'b1000_0000_0000_0001_0000_0000;
@@ -169,7 +171,10 @@ module top_tb();
     wire [31:0] upg_dat_i; // UPG write data
     wire upg_done_i; // 1 if programming is finished
     
+    wire mode_stable, enter_stable;
+
     debounce rst_debounce(fpga_clk, fpga_rst, mode_switch, mode_stable);
+    debounce enter_debounce(fpga_clk,fpga_rst, enter, enter_stable);
     
     always @(posedge mode_stable, posedge fpga_rst) begin
         if (fpga_rst)
@@ -233,7 +238,7 @@ module top_tb();
     .writeData(read_data_2), // from decoder
     .memWrite(MemWrite), // from controller
     .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
-    .sw(sw), .led(led_in)
+    .sw(sw), .led(led_in), .enter(enter_stable)
     );
     
     

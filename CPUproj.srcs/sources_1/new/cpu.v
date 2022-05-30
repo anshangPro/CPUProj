@@ -10,7 +10,8 @@ module cpu(input fpga_rst,
            input rx,                 //receive data
            output tx,                //output to the uart
            input [23:0]sw,
-           output [23:0]led
+           output [23:0]led,
+           input enter               //used to enter data
 );
         //        output [7:0] seg_out,
         //    output [7:0] seg_en
@@ -54,8 +55,10 @@ module cpu(input fpga_rst,
     wire [31:0] upg_dat_i; // UPG write data
     wire upg_done_i; // 1 if programming is finished
 
+    wire mode_stable, enter_stable;
+
     debounce rst_debounce(fpga_clk, fpga_rst, mode_switch, mode_stable);
-    
+    debounce enter_debounce(fpga_clk,fpga_rst, enter, enter_stable);
 
     always @(posedge mode_stable) begin
     mode = mode + 1;
@@ -114,7 +117,7 @@ module cpu(input fpga_rst,
         .writeData(read_data_2), // from decoder
         .memWrite(MemWrite), // from controller
         .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i[13:0]), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
-        .sw(sw), .led(led_in)
+        .sw(sw), .led(led_in), .enter(enter_stable)
         );
     
     

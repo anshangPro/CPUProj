@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module dmemory32(readData,address,writeData,memWrite,clock, upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i, sw, led, rst);
+module dmemory32(readData,address,writeData,memWrite,clock, upg_rst_i, upg_clk_i, upg_wen_i, upg_adr_i, upg_dat_i, upg_done_i, sw, led, rst, enter);
 input rst;
 input clock; // Clock signal
 /* used to determine to write the memory unit or not,
@@ -36,6 +36,8 @@ output reg[31:0] readData;
 
 input [23:0] sw;
 output reg[23:0] led;
+
+input enter;
 
 // UART Programmer Pinouts
 input upg_rst_i; // UPG reset (Active High)
@@ -75,6 +77,7 @@ end
 
 always @* begin
     case (address)
+        32'hffffffff: readData = {31'b0, enter};
         32'hfffffff0: readData = {8'b0, sw};
         32'hffffff00: readData = {8'b0, led};
         default: readData = readDataMem;
