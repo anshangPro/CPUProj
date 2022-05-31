@@ -11,6 +11,10 @@ module cpu(input fpga_rst,
            output tx,                //output to the uart
            input [23:0]sw,
            output [23:0]led,
+           output [7:0] seg_en,             //七段数码显示管
+           output [7:0] seg_out,
+           input [3:0] row,                 //矩阵键盘输入
+           output [3:0] col,                //矩阵键盘输出
            input enter               //used to enter data
 );
         //        output [7:0] seg_out,
@@ -22,18 +26,6 @@ module cpu(input fpga_rst,
     wire upg_clk_10mhz;
     
     cpuclk clk(.clk_in1(fpga_clk),.clk_out1(clk_out), .clk_out2(upg_clk_10mhz));
-    
-    //This code is intended to get a lower frequency clock
-    
-    // reg[31:0] low_clk_reg;
-    // always @(posedge clk_out) begin
-    //     low_clk_reg = low_clk_reg+1;
-    // end
-    // assign low_clk = low_clk_reg[2];
-    
-    // segment seg(
-    //     .clk(low_clk_reg[12]),.rst(fpga_rst),.in(data),.segment_led(seg_out),.seg_en(seg_en)
-    //     );
 
     // ifetch
     wire[31:0] instruction, branch_base_addr, link_addr;
@@ -54,6 +46,11 @@ module cpu(input fpga_rst,
     wire [14:0] upg_adr_i; // UPG write address
     wire [31:0] upg_dat_i; // UPG write data
     wire upg_done_i; // 1 if programming is finished
+    //keyboard
+    wire [3:0] key_value;
+    wire key_flag;
+    //segment
+    wire[63:0] seg_data;
 
     wire mode_stable, enter_stable;
 
@@ -118,8 +115,16 @@ module cpu(input fpga_rst,
         .writeData(read_data_2), // from decoder
         .memWrite(MemWrite), // from controller
         .upg_rst_i(mode), .upg_clk_i(upg_clk_i), .upg_wen_i(upg_wen_i & upg_adr_i[14]), .upg_adr_i(upg_adr_i[13:0]), .upg_dat_i(upg_dat_i), .upg_done_i(upg_done_i), // from uart
-        .sw(sw), .led(led_in), .enter(enter_stable)
+        .sw(sw), .led(led_in), .enter(enter_stable),
+        .key_value(key_value), .seg_data(seg_data)
         );
+
+    //segments
+    seg segment(.clk(fpga_clk), .rst(fpga_rst | ~mode), .seg_in(seg_data), .seg_en(seg_en), .seg_out(seg_out));
     
-    
+    //矩阵键盘输入，flag为1时代表按下
+    key_board key(fpga_clk, (fpga_rst | ~mode), row, col, key_value, key_flag);
+
+
+
 endmodule

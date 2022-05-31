@@ -39,13 +39,13 @@
     <Option Name="WTVcsLaunchSim" Val="0"/>
     <Option Name="WTRivieraLaunchSim" Val="0"/>
     <Option Name="WTActivehdlLaunchSim" Val="0"/>
-    <Option Name="WTXSimExportSim" Val="55"/>
-    <Option Name="WTModelSimExportSim" Val="55"/>
-    <Option Name="WTQuestaExportSim" Val="55"/>
-    <Option Name="WTIesExportSim" Val="55"/>
-    <Option Name="WTVcsExportSim" Val="55"/>
-    <Option Name="WTRivieraExportSim" Val="55"/>
-    <Option Name="WTActivehdlExportSim" Val="55"/>
+    <Option Name="WTXSimExportSim" Val="56"/>
+    <Option Name="WTModelSimExportSim" Val="56"/>
+    <Option Name="WTQuestaExportSim" Val="56"/>
+    <Option Name="WTIesExportSim" Val="56"/>
+    <Option Name="WTVcsExportSim" Val="56"/>
+    <Option Name="WTRivieraExportSim" Val="56"/>
+    <Option Name="WTActivehdlExportSim" Val="56"/>
     <Option Name="GenerateIPUpgradeLog" Val="TRUE"/>
     <Option Name="XSimRadix" Val="hex"/>
     <Option Name="XSimTimeUnit" Val="ns"/>
@@ -84,6 +84,13 @@
           <Attr Name="UsedIn" Val="simulation"/>
         </FileInfo>
       </File>
+      <File Path="$PSRCDIR/sources_1/new/counter.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
       <File Path="$PSRCDIR/sources_1/new/debounce.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
@@ -92,6 +99,20 @@
         </FileInfo>
       </File>
       <File Path="$PSRCDIR/sources_1/new/dmemory32.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/keyboard.v">
+        <FileInfo>
+          <Attr Name="UsedIn" Val="synthesis"/>
+          <Attr Name="UsedIn" Val="implementation"/>
+          <Attr Name="UsedIn" Val="simulation"/>
+        </FileInfo>
+      </File>
+      <File Path="$PSRCDIR/sources_1/new/seg.v">
         <FileInfo>
           <Attr Name="UsedIn" Val="synthesis"/>
           <Attr Name="UsedIn" Val="implementation"/>
