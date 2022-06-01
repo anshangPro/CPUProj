@@ -91,7 +91,10 @@ module executs32(Read_data_1,Read_data_2,Sign_extend,Function_opcode,Exe_opcode,
                 // end
             end
             3'b111: begin
-                ALU_output_mux = $unsigned(Ainput) - $unsigned(Binput);
+                if (Function_opcode == 6'b101011)
+                    ALU_output_mux = $unsigned(Ainput) - $unsigned(Binput);
+                else 
+                    ALU_output_mux = $signed(Ainput) - $signed(Binput);
                 // case(Exe_opcode[3:0])
                 //     4'b0011: begin // subu sltiu
                 //         ALU_output_mux =  $unsigned(Ainput) - $unsigned(Binput);
